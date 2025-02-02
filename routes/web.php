@@ -27,51 +27,62 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         // Routes pour les rapports
-        Route::prefix('reports')->group(function () {
-            Route::get('/generate/{classId}', [ReportController::class, 'generate'])->name('admin.reports.generate');
-            Route::get('/download/{classId}', [ReportController::class, 'download'])->name('admin.reports.download');
-        });
+        // Route::prefix('reports')->group(function () {
+        //     Route::get('/generate/{classId}', [ReportController::class, 'generate'])->name('admin.reports.generate');
+        //     Route::get('/download/{classId}', [ReportController::class, 'download'])->name('admin.reports.download');
+        // });
+    });
+});
 
-        // Routes pour la gestion des classes
-        Route::prefix('classes')->group(function () {
-            Route::get('/', [SchoolClasseController::class, 'index'])->name('admin.classes.index');
-            Route::get('/create', [SchoolClasseController::class, 'create'])->name('admin.classes.create');
-            Route::post('/store', [SchoolClasseController::class, 'store'])->name('admin.classes.store');
-            Route::get('/edit/{id}', [SchoolClasseController::class, 'edit'])->name('admin.classes.edit');
-            Route::post('/update/{id}', [SchoolClasseController::class, 'update'])->name('admin.classes.update');
-            Route::post('/delete/{id}', [SchoolClasseController::class, 'destroy'])->name('admin.classes.delete');
-        });
+//gestion de l'enseignat par l'admin
 
-        // Routes pour la gestion des étudiants
-        Route::prefix('students')->group(function () {
-            Route::get('/', [StudentController::class, 'index'])->name('admin.students.index');
-            Route::get('/create', [StudentController::class, 'create'])->name('admin.students.create');
-            Route::post('/store', [StudentController::class, 'store'])->name('admin.students.store');
-            Route::get('/edit/{id}', [StudentController::class, 'edit'])->name('admin.students.edit');
-            Route::post('/update/{id}', [StudentController::class, 'update'])->name('admin.students.update');
-            Route::post('/delete/{id}', [StudentController::class, 'destroy'])->name('admin.students.delete');
-        });
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('teachers')->name('teachers.')->group(function () {
+        Route::get('/', [TeacherController::class, 'index'])->name('index');
+        Route::get('/create', [TeacherController::class, 'create'])->name('create');
+        Route::post('/store', [TeacherController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [TeacherController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [TeacherController::class, 'update'])->name('update');
+        Route::post('/delete/{id}', [TeacherController::class, 'destroy'])->name('delete');
+    });
+});
 
-        // Routes pour la gestion des matières
-        Route::prefix('subjects')->group(function () {
-            Route::get('/', [SubjectController::class, 'index'])->name('admin.subjects.index');
-            Route::get('/create', [SubjectController::class, 'create'])->name('admin.subjects.create');
-            Route::post('/store', [SubjectController::class, 'store'])->name('admin.subjects.store');
-            Route::get('/edit/{id}', [SubjectController::class, 'edit'])->name('admin.subjects.edit');
-            Route::post('/update/{id}', [SubjectController::class, 'update'])->name('admin.subjects.update');
-            Route::post('/delete/{id}', [SubjectController::class, 'destroy'])->name('admin.subjects.delete');
-        });
+//gestion des matieres
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('subjects')->name('subjects.')->group(function () {
+        Route::get('/', [SubjectController::class, 'index'])->name('index');
+        Route::get('/create', [SubjectController::class, 'create'])->name('create');
+        Route::post('/store', [SubjectController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [SubjectController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [SubjectController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [SubjectController::class, 'delete'])->name('delete');
+    });
 
-        // Routes pour la gestion des enseignants
-        Route::prefix('teachers')->group(function () {
-            Route::get('/', [TeacherController::class, 'index'])->name('admin.teachers.index');
-            Route::get('/create', [TeacherController::class, 'create'])->name('admin.teachers.create');
-            Route::post('/store', [TeacherController::class, 'store'])->name('admin.teachers.store');
-            Route::get('/edit/{id}', [TeacherController::class, 'edit'])->name('admin.teachers.edit');
-            Route::post('/update/{id}', [TeacherController::class, 'update'])->name('admin.teachers.update');
-            Route::post('/delete/{id}', [TeacherController::class, 'destroy'])->name('admin.teachers.delete');
-        });
 
+});
+
+// Routes pour la gestion des classes
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::prefix('school_classes')->name('school_classes.')->group(function () {
+        Route::get('/', [SchoolClasseController::class, 'index'])->name('index');
+        Route::get('/create', [SchoolClasseController::class, 'create'])->name('create');
+        Route::post('/store', [SchoolClasseController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [SchoolClasseController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [SchoolClasseController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [SchoolClasseController::class, 'destroy'])->name('delete');
+    });
+});
+
+// Routes pour la gestion des eleves
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('students')->name('students.')->group(function () {
+        Route::get('/', [StudentController::class, 'index'])->name('index');
+        Route::get('/create', [StudentController::class, 'create'])->name('create');
+        Route::post('/store', [StudentController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [StudentController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [StudentController::class, 'update'])->name('update');
+        Route::post('/delete/{id}', [StudentController::class, 'destroy'])->name('delete');
     });
 });
 

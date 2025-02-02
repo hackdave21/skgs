@@ -54,11 +54,11 @@ class User extends Authenticatable
 
     public function subject()
     {
-        return $this->belongsTo(Subject::class);
+        return $this->belongsToMany(Subject::class);
     }
 
-    public function class()
+    public function school_classe()
     {
-        return $this->belongsTo(SchoolClasse::class);
+        return $this->belongsToMany(SchoolClasse::class);
     }
 }

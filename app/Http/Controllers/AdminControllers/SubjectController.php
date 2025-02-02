@@ -27,7 +27,7 @@ class SubjectController extends Controller
 
         Subject::create($request->only('name'));
 
-        return redirect()->route('admin.subjects.index')->with('success', 'Subject added successfully');
+        return redirect()->route('admin.subjects.index')->with('success', 'La matière a été ajoutée avec succès');
     }
 
     public function edit($id)
@@ -45,12 +45,12 @@ class SubjectController extends Controller
         $subject = Subject::findOrFail($id);
         $subject->update($request->only('name'));
 
-        return redirect()->route('admin.subjects.index')->with('success', 'Subject updated successfully');
+        return redirect()->route('admin.subjects.index')->with('success', 'La matière a été mis a jour avec succès');
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
         Subject::findOrFail($id)->delete();
-        return redirect()->route('admin.subjects.index')->with('success', 'Subject deleted successfully');
+        return redirect()->route('admin.subjects.index')->with('success', 'La matière a été supprimée avec succès');
     }
 }

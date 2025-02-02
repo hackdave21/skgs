@@ -10,13 +10,13 @@ class SchoolClasseController extends Controller
 {
     public function index()
     {
-        $classes = SchoolClasse::all();
-        return view('admin.classes.index', compact('classes'));
+        $school_classes = SchoolClasse::all();
+        return view('admin.school_classes.index', compact('school_classes'));
     }
 
     public function create()
     {
-        return view('admin.classes.create');
+        return view('admin.school_classes.create');
     }
 
     public function store(Request $request)
@@ -27,13 +27,13 @@ class SchoolClasseController extends Controller
 
         SchoolClasse::create($request->only('name'));
 
-        return redirect()->route('admin.classes.index')->with('success', 'Class added successfully');
+        return redirect()->route('admin.school_classes.index')->with('success', 'Classe ajoutée avec succès');
     }
 
     public function edit($id)
     {
-        $class = SchoolClasse::findOrFail($id);
-        return view('admin.classes.edit', compact('class'));
+        $school_classe = SchoolClasse::findOrFail($id);
+        return view('admin.school_classes.edit', compact('school_classe'));
     }
 
     public function update(Request $request, $id)
@@ -42,15 +42,15 @@ class SchoolClasseController extends Controller
             'name' => 'required|string|max:255|unique:school_classes,name,' . $id,
         ]);
 
-        $class = SchoolClasse::findOrFail($id);
-        $class->update($request->only('name'));
+        $school_classe = SchoolClasse::findOrFail($id);
+        $school_classe->update($request->only('name'));
 
-        return redirect()->route('admin.classes.index')->with('success', 'Class updated successfully');
+        return redirect()->route('admin.school_classes.index')->with('success', 'Classe mis à jour avec Succès');
     }
 
     public function destroy($id)
     {
         SchoolClasse::findOrFail($id)->delete();
-        return redirect()->route('admin.classes.index')->with('success', 'Class deleted successfully');
+        return redirect()->route('admin.school_classes.index')->with('success', 'Classe supprimée avec Succès');
     }
 }

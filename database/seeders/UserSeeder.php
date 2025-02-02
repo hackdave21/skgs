@@ -22,11 +22,9 @@ class UserSeeder extends Seeder
             'diplome' => 'licence',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('12345p678'),
             'subject_id' => 1,
             'school_classe_id' => 1,
         ]);
-
-
     }
 }

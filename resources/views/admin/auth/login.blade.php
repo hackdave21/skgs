@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Admin panel login page." name="description" />
     <meta content="Author" name="author" />
-    <link rel="shortcut icon" href="{{ asset('assets/images/logoKOF.png') }}">
+    <link rel="shortcut icon" href="{{ asset('template/ubold/assets/images/SKGS.png') }}">
     <link href="{{ asset('template/ubold/layouts/assets/css/config/purple/app.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('template/ubold/layouts/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMg0lZSYLqTw/ey4HsBR5hfBc5p6bBhF23HOZf4" crossorigin="anonymous">
@@ -47,7 +47,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center w-75 m-auto">
                                     <a href="{{ route('admin.dashboard') }}" class="logo">
-                                        <img src="{{ asset('assets/images/logoKOF.png') }}" alt="logo" height="22">
+                                        <img src="{{ asset('template/ubold/assets/images/SKGS.png') }}" alt="logo" height="22">
                                     </a>
                                     <p class="text-muted mb-4 mt-3">Entrez votre adresse email et votre mot de passe pour accéder au panneau d'administration.</p>
                                 </div>

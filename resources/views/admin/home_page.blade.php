@@ -10,7 +10,7 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('template/ubold/layouts/assets/images/logoKOF.png') }}">
+    <link rel="shortcut icon" href="{{ asset('template/ubold/assets/images/SKGS.png') }}">
 
     <!-- Plugins css -->
     <link href="{{ asset('template/ubold/layouts/assets/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />

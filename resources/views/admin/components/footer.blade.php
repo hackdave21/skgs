@@ -4,9 +4,9 @@
             <div class="col-md-6">
                 <script>
                     document.write(new Date().getFullYear())
-                </script> &copy; KOFACADEMY powered by <a href="https://kofcorporation.com/">KofCorporation</a>
+                </script> &copy; SKGS powered by <a href="">flutter_dave</a>
             </div>
-            
+
         </div>
     </div>
 </footer>
