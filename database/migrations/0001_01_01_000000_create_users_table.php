@@ -23,8 +23,6 @@ return new class extends Migration
             $table->string('sex');
             $table->string('diplome');
             $table->string('password');
-            $table->foreignIdFor(Subject::class);
-            $table->foreignIdFor(SchoolClasse::class);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -34,7 +34,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-//gestion de l'enseignat par l'admin
+//gestion de l'enseignant par l'admin
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('teachers')->name('teachers.')->group(function () {
@@ -43,7 +43,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/store', [TeacherController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [TeacherController::class, 'edit'])->name('edit');
         Route::post('/update/{id}', [TeacherController::class, 'update'])->name('update');
-        Route::post('/delete/{id}', [TeacherController::class, 'destroy'])->name('delete');
+        Route::delete('/delete/{id}', [TeacherController::class, 'delete'])->name('delete');
     });
 });
 

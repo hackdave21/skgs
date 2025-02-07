@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\SchoolClasse;
+use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,17 +16,29 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'first_name' => 'kodjo',
-            'last_name' => 'KOKOU',
-            'phone_number' => '93617132',
+        $admin = User::create([
+            'first_name' => 'John',
+            'last_name' => 'DOE',
+            'phone_number' => '90909090',
             'sex' => 'masculin',
             'diplome' => 'licence',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('12345p678'),
-            'subject_id' => 1,
-            'school_classe_id' => 1,
+            'password' => Hash::make('123456789'),
+            // 'subject_id' => 1,
+            // 'school_classe_id' => 1,
         ]);
+
+        // Récupérer toutes les matières et attacher directement
+        $subjects = Subject::all();
+        foreach($subjects as $subject) {
+            $admin->subject()->attach($subject->id);
+        }
+
+        // Récupérer toutes les classes et attacher directement
+        $classes = SchoolClasse::all();
+        foreach($classes as $class) {
+            $admin->school_Classe()->attach($class->id);
+        }
     }
 }

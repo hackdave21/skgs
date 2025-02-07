@@ -52,12 +52,12 @@ class User extends Authenticatable
         ];
     }
 
-    public function subject()
+    public function subjects()
     {
         return $this->belongsToMany(Subject::class);
     }
 
-    public function school_classe()
+    public function schoolClasses()
     {
         return $this->belongsToMany(SchoolClasse::class);
     }

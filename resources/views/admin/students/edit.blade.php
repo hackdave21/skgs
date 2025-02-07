@@ -26,6 +26,12 @@
                         @csrf
                         @method('PUT')
 
+                         <!-- Champ Nom -->
+                         <div class="mb-3">
+                            <label for="last_name" class="form-label">Nom <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="last_name" name="last_name"
+                                   value="{{ old('last_name', $student->last_name) }}" required>
+                        </div>
                         <!-- Champ Prénom -->
                         <div class="mb-3">
                             <label for="first_name" class="form-label">Prénom <span style="color: red;">*</span></label>
@@ -33,12 +39,7 @@
                                    value="{{ old('first_name', $student->first_name) }}" required>
                         </div>
 
-                        <!-- Champ Nom -->
-                        <div class="mb-3">
-                            <label for="last_name" class="form-label">Nom <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" id="last_name" name="last_name"
-                                   value="{{ old('last_name', $student->last_name) }}" required>
-                        </div>
+
 
                         <!-- Champ Numéro de Matricule -->
                         <div class="mb-3">

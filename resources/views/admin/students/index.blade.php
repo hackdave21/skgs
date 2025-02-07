@@ -32,8 +32,9 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Prénom</th>
                                             <th>Nom</th>
+                                            <th>Prénom</th>
+
                                             <th>Numéro de Matricule</th>
                                             <th>Actions</th>
                                         </tr>
@@ -42,8 +43,9 @@
                                         @foreach ($school_classe->students as $student)
                                             <tr>
                                                 <td>{{ $student->id }}</td>
-                                                <td>{{ $student->first_name }}</td>
                                                 <td>{{ $student->last_name }}</td>
+                                                <td>{{ $student->first_name }}</td>
+
                                                 <td>{{ $student->matricule_number }}</td>
                                                 <td>
                                                     <!-- Lien pour modifier -->

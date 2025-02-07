@@ -30,6 +30,14 @@
                     <form action="{{ route('admin.students.store') }}" method="POST">
                         @csrf
 
+                           <!-- Champ Nom -->
+                           <div class="mb-3">
+                            <label for="last_name" class="form-label">Nom de l'élève <span
+                                    style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="last_name" name="last_name"
+                                value="{{ old('last_name') }}" required>
+                        </div>
+
                         <!-- Champ Prénom -->
                         <div class="mb-3">
                             <label for="first_name" class="form-label">Prénom de l'élève <span
@@ -38,13 +46,6 @@
                                 value="{{ old('first_name') }}" required>
                         </div>
 
-                        <!-- Champ Nom -->
-                        <div class="mb-3">
-                            <label for="last_name" class="form-label">Nom de l'élève <span
-                                    style="color: red;">*</span></label>
-                            <input type="text" class="form-control" id="last_name" name="last_name"
-                                value="{{ old('last_name') }}" required>
-                        </div>
 
                         <!-- Champ Matricule -->
                         <div class="mb-3">

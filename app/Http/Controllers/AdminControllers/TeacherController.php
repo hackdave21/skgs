@@ -12,16 +12,17 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-
-        return view('admin.teachers.create', compact('users'));
+        $users = User::with(['subjects', 'schoolClasses'])->get();
+        $subjects = Subject::all();
+        $schoolClasses = SchoolClasse::all();
+        return view('admin.teachers.index', compact('users','subjects', 'schoolClasses'));
     }
 
     public function create()
     {
-        $subjects = \App\Models\Subject::all();
-        $schoolClasses = \App\Models\SchoolClasse::all();
-        return view('admin.teachers.create',  compact('subjects', 'schoolClasses'));
+        $subjects = Subject::all();
+        $schoolClasses = SchoolClasse::all();
+        return view('admin.teachers.create', compact('subjects', 'schoolClasses'));
     }
 
     public function store(Request $request)
@@ -34,11 +35,13 @@ class TeacherController extends Controller
             'sex' => 'required|in:M,F',
             'diplome' => 'required|string',
             'password' => 'required|min:6',
-            'subject_id' => 'required|exists:subjects,id',
-            'school_classe_id' => 'required|exists:school_classes,id',
+            'subject_ids' => 'required|array|min:1',
+            'subject_ids.*' => 'exists:subjects,id',
+            'school_classe_ids' => 'required|array|min:1',
+            'school_classe_ids.*' => 'exists:school_classes,id',
         ]);
 
-        User::create([
+        $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
@@ -46,19 +49,21 @@ class TeacherController extends Controller
             'sex' => $request->sex,
             'diplome' => $request->diplome,
             'password' => bcrypt($request->password),
-            'subject_id' => $request->subject_id,
-            'school_classe_id' => $request->school_classe_id,
         ]);
 
-        return redirect()->route('admin.teachers.index')->with('success', 'Teacher added successfully');
+        $user->subjects()->attach($request->subject_ids);
+        $user->schoolClasses()->attach($request->school_classe_ids);
+
+        return redirect()->route('admin.teachers.index')
+            ->with('success', 'Enseignant ajouté avec succès');
     }
 
     public function edit($id)
     {
-        $teacher = User::findOrFail($id);
+        $users = User::with(['subjects', 'schoolClasses'])->findOrFail($id);
         $subjects = Subject::all();
         $schoolClasses = SchoolClasse::all();
-        return view('admin.teachers.edit', compact('teacher', 'subjects', 'schoolClasses'));
+        return view('admin.teachers.edit', compact('users', 'subjects', 'schoolClasses'));
     }
 
     public function update(Request $request, $id)
@@ -70,29 +75,38 @@ class TeacherController extends Controller
             'phone_number' => 'required|string',
             'sex' => 'required|in:M,F',
             'diplome' => 'required|string',
-            'subject_id' => 'required|exists:subjects,id',
-            'school_classe_id' => 'required|exists:school_classes,id',
+            'subject_ids' => 'required|array|min:1',
+            'subject_ids.*' => 'exists:subjects,id',
+            'school_classe_ids' => 'required|array|min:1',
+            'school_classe_ids.*' => 'exists:school_classes,id',
         ]);
 
-        $teacher = User::findOrFail($id);
-        $teacher->update([
+        $user = User::findOrFail($id);
+        $user->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
             'phone_number' => $request->phone_number,
             'sex' => $request->sex,
             'diplome' => $request->diplome,
-            'subject_id' => $request->subject_id,
-            'school_classe_id' => $request->school_classe_id,
         ]);
+
+        $user->subjects()->sync($request->subject_ids);
+        $user->schoolClasses()->sync($request->school_classe_ids);
 
         return redirect()->route('admin.teachers.index')
             ->with('success', 'Enseignant modifié avec succès');
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
-        User::findOrFail($id)->delete();
+        $user = User::findOrFail($id);
+
+        // Détacher toutes les relations avant la suppression
+        $user->subjects()->detach();
+        $user->schoolClasses()->detach();
+        $user->delete();
+
         return redirect()->route('admin.teachers.index')
             ->with('success', 'Enseignant supprimé avec succès');
     }
