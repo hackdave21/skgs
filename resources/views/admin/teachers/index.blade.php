@@ -71,7 +71,7 @@
                                     </td>
 
                                     <td>
-                                        <a href="{{ route('admin.teachers.edit', $user->id) }}" class="btn btn-warning btn-sm">Modifier</a>
+                                        <a href="{{ route('admin.teachers.edit', $user->id) }}" class="btn btn-warning btn-sm">Modifier</a> <br>
                                         <form action="{{ route('admin.teachers.delete', $user->id) }}" method="POST" style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')

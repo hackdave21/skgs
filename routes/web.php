@@ -42,7 +42,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', [TeacherController::class, 'create'])->name('create');
         Route::post('/store', [TeacherController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [TeacherController::class, 'edit'])->name('edit');
-        Route::post('/update/{id}', [TeacherController::class, 'update'])->name('update');
+        Route::put('/update/{id}', [TeacherController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [TeacherController::class, 'delete'])->name('delete');
     });
 });
@@ -57,8 +57,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/update/{id}', [SubjectController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [SubjectController::class, 'delete'])->name('delete');
     });
-
-
 });
 
 // Routes pour la gestion des classes
