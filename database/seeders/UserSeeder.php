@@ -32,13 +32,13 @@ class UserSeeder extends Seeder
         // Récupérer toutes les matières et attacher directement
         $subjects = Subject::all();
         foreach($subjects as $subject) {
-            $admin->subject()->attach($subject->id);
+            $admin->subjects()->attach($subject->id);
         }
 
         // Récupérer toutes les classes et attacher directement
         $classes = SchoolClasse::all();
         foreach($classes as $class) {
-            $admin->school_Classe()->attach($class->id);
+            $admin->schoolClasses()->attach($class->id);
         }
     }
 }

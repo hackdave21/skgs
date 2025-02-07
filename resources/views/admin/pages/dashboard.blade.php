@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end">
-                                <h3 class="text-dark mt-1"><span data-plugin="counterup">....</span></h3>
+                                <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ $teachers_count }}</span></h3>
                                 <p class="text-muted mb-1 text-truncate">Nombre d'enseignants</p>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end">
-                                <h3 class="text-dark mt-1"><span data-plugin="counterup">....</span></h3>
+                                <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ $subjects_count }}</span></h3>
                                 <p class="text-muted mb-1 text-truncate">Nombre de matières</p>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end">
-                                <h3 class="text-dark mt-1"><span data-plugin="counterup">....</span></h3>
+                                <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ $classes_count }}</span></h3>
                                 <p class="text-muted mb-1 text-truncate">Nombre de classes</p>
                             </div>
                         </div>
