@@ -15,10 +15,10 @@ class TeacherAuthController extends Controller
      */
     public function showLoginForm()
     {
-        return view('platform.teachers.login');
+        return view('frontend.login');
     }
 
- 
+
     public function login(Request $request)
     {
         $request->validate([

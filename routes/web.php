@@ -84,12 +84,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-// // Routes pour l'authentification des enseignants
-// Route::prefix('teacher')->group(function () {
-//     Route::get('/login', [TeacherAuthController::class, 'showLoginForm'])->name('teacher.login');
-//     Route::post('/login', [TeacherAuthController::class, 'login'])->name('teacher.login.submit');
-//     Route::post('/logout', [TeacherAuthController::class, 'logout'])->name('teacher.logout');
-// });
+// Routes pour l'authentification des enseignants
+Route::get('/', function () {
+    return redirect()->route('teacher.login');
+});
+
+Route::prefix('teacher')->group(function () {
+    Route::get('/login', [TeacherAuthController::class, 'showLoginForm'])->name('teacher.login');
+    Route::post('/login', [TeacherAuthController::class, 'login'])->name('teacher.login.submit');
+    Route::post('/logout', [TeacherAuthController::class, 'logout'])->name('teacher.logout');
+});
 
 // Routes pour la gestion des notes
 // Route::prefix('notes')->group(function () {
