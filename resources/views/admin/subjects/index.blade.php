@@ -18,7 +18,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    {{-- <a href="{{ route('admin.subjects.create') }}" class="btn btn-primary mb-3">Ajouter une nouvelle matière</a> --}}
+                    <a href="{{ route('admin.subjects.create') }}" class="btn btn-primary mb-3">Ajouter une nouvelle matière</a>
                     <table class="table table-bordered">
                         <thead>
                             <tr>

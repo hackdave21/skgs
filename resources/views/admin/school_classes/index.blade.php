@@ -24,7 +24,7 @@
                     @endif
 
                       <!-- Bouton pour ajouter un nouvel élève -->
-                      {{-- <a href="{{ route('admin.school_classes.create') }}" class="btn btn-primary mb-3">Ajouter une nouvelle classe</a> --}}
+                      <a href="{{ route('admin.school_classes.create') }}" class="btn btn-primary mb-3">Ajouter une nouvelle classe</a>
 
                     <table class="table table-bordered">
                         <thead>

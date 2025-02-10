@@ -24,22 +24,34 @@ class TeacherAuthController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+        ], [
+            'email.required' => 'L\'email est requis',
+            'email.email' => 'Veuillez entrer un email valide',
+            'password.required' => 'Le mot de passe est requis'
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->route('platform.dashboard')->with('success', 'Logged in successfully.');
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // L'authentification a réussi
+            $request->session()->regenerate();
+            return redirect()->intended(route('frontend.index'))
+                           ->with('success', 'Connexion réussie !');
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials'])->withInput($request->only('email'));
+        return back()->withErrors([
+            'email' => 'Ces identifiants sont invalides.'
+        ])->withInput($request->only('email'));
     }
 
-    /**
-     * Déconnecte l'enseignant.
-     */
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
-        return redirect()->route('teacher.login')->with('success', 'Logged out successfully.');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('teacher.login')
+                        ->with('success', 'Déconnexion réussie.');
     }
 
 

@@ -80,7 +80,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/store', [StudentController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [StudentController::class, 'edit'])->name('edit');
         Route::put('/update/{id}', [StudentController::class, 'update'])->name('update');
-        Route::post('/delete/{id}', [StudentController::class, 'destroy'])->name('delete');
+        Route::delete('/delete/{id}', [StudentController::class, 'destroy'])->name('delete');
     });
 });
 
@@ -94,6 +94,10 @@ Route::prefix('teacher')->group(function () {
     Route::post('/login', [TeacherAuthController::class, 'login'])->name('teacher.login.submit');
     Route::post('/logout', [TeacherAuthController::class, 'logout'])->name('teacher.logout');
 });
+// Route pour la page d'accueil après connexion
+Route::get('/teacher/dashboard', function () {
+    return view('frontend.index');
+})->name('frontend.index')->middleware('auth');
 
 // Routes pour la gestion des notes
 // Route::prefix('notes')->group(function () {

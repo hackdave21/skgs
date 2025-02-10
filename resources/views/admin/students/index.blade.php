@@ -21,7 +21,7 @@
                     @endif
 
                     <!-- Bouton pour ajouter un nouvel élève -->
-                    {{-- <a href="{{ route('admin.students.create') }}" class="btn btn-primary mb-3">Ajouter un nouvel élève</a> --}}
+                    <a href="{{ route('admin.students.create') }}" class="btn btn-primary mb-3">Ajouter un nouvel élève</a>
 
                     <!-- Affichage des élèves par classe -->
                     @foreach ($school_classes as $school_classe)

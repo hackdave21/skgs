@@ -85,23 +85,48 @@
 								<img src="{{ asset('platform/assets/img/SKGS.png') }}" class="img-fluid" alt="Logo">
 							</div>
 							<h1>Bienvenue sur SKGS entrez vos identifiants pour vous connecter</h1>
-							<form action="#">
-								<div class="input-block">
-									<label class="form-control-label">Email</label>
-									<input type="email" class="form-control" placeholder="entrez votre email">
-								</div>
-								<div class="input-block">
-									<label class="form-control-label">Mot de passe</label>
-									<div class="pass-group">
-										<input type="password" class="form-control pass-input"
-											placeholder="entrez votre mot de passe">
-										<span class="feather-eye toggle-password"></span>
-									</div>
-								</div>
-								<div class="d-grid">
-									<button class="btn btn-primary btn-start" type="submit">Connexion</button>
-								</div>
-							</form>
+							<form action="{{ route('teacher.login.submit') }}" method="POST">
+                                @csrf
+                                <div class="input-block">
+                                    <label class="form-control-label">Email</label>
+                                    <input type="email"
+                                           name="email"
+                                           class="form-control @error('email') is-invalid @enderror"
+                                           value="{{ old('email') }}"
+                                           placeholder="entrez votre email">
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="input-block">
+                                    <label class="form-control-label">Mot de passe</label>
+                                    <div class="pass-group">
+                                        <input type="password"
+                                               name="password"
+                                               class="form-control pass-input @error('password') is-invalid @enderror"
+                                               placeholder="entrez votre mot de passe">
+                                        <span class="feather-eye toggle-password"></span>
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <!-- Affichage des messages de succès -->
+                                @if(session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
+
+                                <div class="d-grid">
+                                    <button class="btn btn-primary btn-start" type="submit">Connexion</button>
+                                </div>
+                            </form>
 						</div>
 					</div>
 

@@ -11,11 +11,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('template/ubold/assets/images/SKGS.png') }}">
-
+    <style>.input-group-text {
+        cursor: pointer;
+    }</style>
     <!-- Plugins css -->
     <link href="{{ asset('template/ubold/layouts/assets/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('template/ubold/layouts/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- App css -->
     <link href="{{ asset('template/ubold/layouts/assets/css/config/purple/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
