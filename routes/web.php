@@ -12,7 +12,7 @@ use App\Http\Controllers\AdminControllers\TeacherController;
 use App\Http\Controllers\PlateformControllers\TeacherAuthController;
 use App\Http\Controllers\PlateformControllers\NoteController;
 use App\Http\Controllers\PlateformControllers\BulletinController;
-
+use App\Http\Controllers\PlateformControllers\IndexController as PlateformControllersIndexController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -88,16 +88,34 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/', function () {
     return redirect()->route('teacher.login');
 });
-
+Route::get('index', [PlateformControllersIndexController::class, 'index'])->name('index');
 Route::prefix('teacher')->group(function () {
     Route::get('/login', [TeacherAuthController::class, 'showLoginForm'])->name('teacher.login');
     Route::post('/login', [TeacherAuthController::class, 'login'])->name('teacher.login.submit');
     Route::post('/logout', [TeacherAuthController::class, 'logout'])->name('teacher.logout');
 });
 // Route pour la page d'accueil après connexion
-Route::get('/teacher/dashboard', function () {
-    return view('frontend.index');
-})->name('frontend.index')->middleware('auth');
+// Route::get('/teacher/dashboard', function () {
+//     return view('frontend.index');
+// })->name('frontend.index')->middleware('auth');
+
+// Route::get('/teacher/dashboard', [PlateformControllersIndexController::class, 'index'])
+//     ->name('frontend.index')
+//     ->middleware('auth');
+
+    // Routes pour la gestion des classes des enseignants
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('teacher')->name('teacher.')->group(function () {
+        Route::get('/dashboard', [PlateformControllersIndexController::class, 'index'])
+            ->name('frontend.index');
+            
+        // Routes pour les classes
+        Route::prefix('classes')->name('classes.')->group(function () {
+            Route::get('/{id}', [PlateformControllersIndexController::class, 'show'])
+                ->name('show');
+        });
+    });
+});
 
 // Routes pour la gestion des notes
 // Route::prefix('notes')->group(function () {

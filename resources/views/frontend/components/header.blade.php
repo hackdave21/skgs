@@ -11,32 +11,32 @@
                             <span></span>
                         </span>
                     </a>
-                    <a href="index-2.html" class="navbar-brand logo">
-                        <img src="assets/img/logo/logo-five.png" class="img-fluid" alt="Logo">
-                    </a>
+                    {{-- <a href="#" class="navbar-brand logo">
+                        <img src="{{ asset('template/ubold/assets/images/SKGS1.png') }}" class="img-fluid" alt="Logo" style="height: 80px">
+                    </a> --}}
                 </div>
                 <div class="main-menu-wrapper">
-                    <div class="menu-header">
-                        <a href="index-2.html" class="menu-logo">
-                            <img src="assets/img/logo/logo-five.svg" class="img-fluid" alt="Logo">
+                    {{-- <div class="menu-header">
+                        <a href="#" class="menu-logo">
+                            <img src="{{ asset('template/ubold/assets/images/SKGS1.png') }}" class="img-fluid" alt="Logo" style="height: 80px">
                         </a>
                         <a id="menu_close" class="menu-close" href="javascript:void(0);">
                             <i class="fas fa-times"></i>
                         </a>
-                    </div>
+                    </div> --}}
                     <ul class="main-nav">
-                        <li class="has-submenu active">
-                            <a href="#">Home <i class="fas fa-chevron-down"></i></a>
-                            <ul class="submenu">
+                        <li class="has-submenu active" >
+                            <a href="#">Accueil</i></a>
+                            {{-- <ul class="submenu">
                                 <li><a href="index-2.html">Home</a></li>
                                 <li><a href="index-two.html">Home Two</a></li>
                                 <li><a href="index-three.html">Home Three</a></li>
                                 <li class="active"><a href="index-four.html">Home Four</a></li>
-                            </ul>
+                            </ul> --}}
                         </li>
-                        <li class="has-submenu">
-                            <a href="#">Instructor <i class="fas fa-chevron-down"></i></a>
-                            <ul class="submenu">
+                        <li class="has-submenu" >
+                            <a href="#">Historique</a>
+                            {{-- <ul class="submenu">
                                 <li class="has-submenu">
                                     <a href="instructor-list.html">Instructor</a>
                                     <ul class="submenu">
@@ -57,11 +57,11 @@
                                 <li><a href="instructor-tickets.html">Support Ticket</a></li>
                                 <li><a href="instructor-notifications.html">Notifications</a></li>
                                 <li><a href="instructor-settings.html">Settings</a></li>
-                            </ul>
+                            </ul> --}}
                         </li>
                         <li class="has-submenu">
-                            <a href="#">Student <i class="fas fa-chevron-down"></i></a>
-                            <ul class="submenu first-submenu">
+                            <a href="#">Mon compte</a>
+                            {{-- <ul class="submenu first-submenu">
                                 <li class="has-submenu">
                                     <a href="students-list.html">Student</a>
                                     <ul class="submenu">
@@ -81,11 +81,11 @@
                                 <li><a href="student-messages.html">Messages</a></li>
                                 <li><a href="student-tickets.html">Support Ticket</a></li>
                                 <li><a href="student-settings.html">Settings</a></li>
-                            </ul>
+                            </ul> --}}
                         </li>
                         <li class="has-submenu">
-                            <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
-                            <ul class="submenu">
+                            <a href="#">Contact</i></a>
+                            {{-- <ul class="submenu">
                                 <li><a href="notifications.html">Notification</a></li>
                                 <li><a href="pricing-plan.html">Pricing Plan</a></li>
                                 <li><a href="wishlist.html">Wishlist</a></li>
@@ -115,10 +115,10 @@
                                 <li><a href="login.html">Login</a></li>
                                 <li><a href="register.html">Register</a></li>
                                 <li><a href="forgot-password.html">Forgot Password</a></li>
-                            </ul>
+                            </ul> --}}
                         </li>
-                        <li class="has-submenu">
-                            <a href="#">Blog <i class="fas fa-chevron-down"></i></a>
+                        {{-- <li class="has-submenu">
+                            <a href="#">Blog<i class="fas fa-chevron-down"></i></a>
                             <ul class="submenu">
                                 <li><a href="blog-list.html">Blog List</a></li>
                                 <li><a href="blog-grid.html">Blog Grid</a></li>
@@ -126,7 +126,7 @@
                                 <li><a href="blog-modern.html">Blog Modern</a></li>
                                 <li><a href="blog-details.html">Blog Details</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
                 <ul class="nav header-navbar-rht header-navbar-five">
@@ -140,11 +140,9 @@
                             </a>
                         </div>
                     </li>
+
                     <li class="nav-item">
-                        <a class="login-five" href="login.html">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="signup-five" href="register.html">Signup</a>
+                        <a class="signup-five" href="#">Deconnexion</a>
                     </li>
                 </ul>
             </div>
