@@ -11,19 +11,10 @@
                             <span></span>
                         </span>
                     </a>
-                    {{-- <a href="#" class="navbar-brand logo">
-                        <img src="{{ asset('template/ubold/assets/images/SKGS1.png') }}" class="img-fluid" alt="Logo" style="height: 80px">
-                    </a> --}}
+
                 </div>
                 <div class="main-menu-wrapper">
-                    {{-- <div class="menu-header">
-                        <a href="#" class="menu-logo">
-                            <img src="{{ asset('template/ubold/assets/images/SKGS1.png') }}" class="img-fluid" alt="Logo" style="height: 80px">
-                        </a>
-                        <a id="menu_close" class="menu-close" href="javascript:void(0);">
-                            <i class="fas fa-times"></i>
-                        </a>
-                    </div> --}}
+
                     <ul class="main-nav">
                         <li class="has-submenu active" >
                             <a href="#">Accueil</i></a>

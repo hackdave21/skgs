@@ -28,10 +28,13 @@ class IndexController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $class = $user->schoolClasses()
-            ->with('students')
-            ->findOrFail($id);
+        $schoolClasse = $user->schoolClasses()
+        ->with(['students' => function($query) {
+            $query->orderBy('last_name')
+                  ->orderBy('first_name');
+        }])
+        ->findOrFail($id);
 
-        return view('teacher.classes.show', compact('class'));
+    return view('frontend.show', compact('schoolClasse'));
     }
 }
