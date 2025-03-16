@@ -133,7 +133,41 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="signup-five" href="#">Deconnexion</a>
+                        <!-- Add a hidden debug div to check the actual route -->
+                        <div style="display: none;" id="debug-route">Route: {{ route('teacher.logout') }}</div>
+
+                        <form action="{{ route('teacher.logout') }}" method="POST" class="d-inline" id="logout-form">
+                            @csrf
+                            <button type="submit" class="signup-five btn-link" style="padding: 15px;">Deconnexion</button>
+                        </form>
+
+                        <!-- Alternative JavaScript-based approach -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const logoutForm = document.getElementById('logout-form');
+                                logoutForm.addEventListener('submit', function(e) {
+                                    // Prevent the default form submission
+                                    e.preventDefault();
+
+                                    // Create a new form element
+                                    const form = document.createElement('form');
+                                    form.method = 'POST';
+                                    form.action = "{{ route('teacher.logout') }}";
+                                    form.style.display = 'none';
+
+                                    // Add CSRF token
+                                    const csrfToken = document.createElement('input');
+                                    csrfToken.type = 'hidden';
+                                    csrfToken.name = '_token';
+                                    csrfToken.value = "{{ csrf_token() }}";
+                                    form.appendChild(csrfToken);
+
+                                    // Add to the document and submit
+                                    document.body.appendChild(form);
+                                    form.submit();
+                                });
+                            });
+                        </script>
                     </li>
                 </ul>
             </div>

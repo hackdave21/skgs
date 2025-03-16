@@ -17,4 +17,10 @@ class SchoolClasse extends Model
     {
         return $this->belongsToMany(User::class);
     }
+    public function subjects()
+{
+    return $this->hasMany(Subject::class, 'school_class_id');
+    // OU
+    // return $this->belongsToMany(Subject::class);
+}
 }

@@ -17,4 +17,8 @@ class Subject extends Model
     {
         return $this->hasMany(Grade::class);
     }
+    public function subjects()
+{
+    return $this->belongsToMany(Subject::class)->withPivot('note');
+}
 }

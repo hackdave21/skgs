@@ -94,21 +94,11 @@ Route::prefix('teacher')->group(function () {
     Route::post('/login', [TeacherAuthController::class, 'login'])->name('teacher.login.submit');
     Route::post('/logout', [TeacherAuthController::class, 'logout'])->name('teacher.logout');
 });
-// Route pour la page d'accueil après connexion
-// Route::get('/teacher/dashboard', function () {
-//     return view('frontend.index');
-// })->name('frontend.index')->middleware('auth');
-
-// Route::get('/teacher/dashboard', [PlateformControllersIndexController::class, 'index'])
-//     ->name('frontend.index')
-//     ->middleware('auth');
-
     // Routes pour la gestion des classes des enseignants
 Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [PlateformControllersIndexController::class, 'index'])
+    ->name('frontend.index');
     Route::prefix('teacher')->name('teacher.')->group(function () {
-        Route::get('/dashboard', [PlateformControllersIndexController::class, 'index'])
-            ->name('frontend.index');
-            
         // Routes pour les classes
         Route::prefix('classes')->name('classes.')->group(function () {
             Route::get('/{id}', [PlateformControllersIndexController::class, 'show'])
@@ -118,12 +108,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Routes pour la gestion des notes
-// Route::prefix('notes')->group(function () {
-//     Route::get('/{SchoolClassId}/{subjectId}', [NoteController::class, 'showForm'])->name('notes.form');
-//     Route::post('/{SchoolClassId}/{subjectId}', [NoteController::class, 'store'])->name('notes.store');
-//     Route::get('/{SchoolClassId}/{subjectId}/{studentId}/edit', [NoteController::class, 'edit'])->name('notes.edit');
-//     Route::put('/{SchoolClassId}/{subjectId}/{studentId}', [NoteController::class, 'update'])->name('notes.update');
-// });
+Route::prefix('notes')->group(function () {
+    Route::get('/{SchoolClassId}/{subjectId}', [NoteController::class, 'showForm'])->name('notes.form');
+    Route::post('/store', [NoteController::class, 'store'])->name('notes.store');
+    Route::get('/get-subjects/{schoolClassId}/{studentId}', [NoteController::class, 'getSubjects'])->name('notes.getSubjects');
+    Route::get('/{SchoolClassId}/{subjectId}/{studentId}/edit', [NoteController::class, 'edit'])->name('notes.edit');
+    Route::put('/{SchoolClassId}/{subjectId}/{studentId}', [NoteController::class, 'update'])->name('notes.update');
+});
 
 // // Routes pour la gestion des bulletins
 // Route::prefix('bulletins')->group(function () {

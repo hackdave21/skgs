@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <title>@yield('title') | SKGS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/ubold/assets/images/SKGS.png') }}">
 
@@ -62,7 +63,8 @@
 	</div>
 	<!-- /Main Wrapper -->
 
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
    <!-- jQuery -->
 	<script src="{{ asset("platform/assets/js/jquery-3.7.1.min.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
 
@@ -89,7 +91,7 @@
 	<script src="{{ asset("platform/assets/js/script.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
 
 <script src="https://dreamslms.dreamstechnologies.com/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="832a7c381eebdb5575f29e68-|49" defer></script>
-
+@yield('scripts')
 </body>
 
 
