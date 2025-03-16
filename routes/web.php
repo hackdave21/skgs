@@ -88,6 +88,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/', function () {
     return redirect()->route('teacher.login');
 });
+Route::get('/teacher/subjects', [PlateformControllersIndexController::class, 'getTeacherSubjects'])->name('teacher.subjects');
 Route::get('index', [PlateformControllersIndexController::class, 'index'])->name('index');
 Route::prefix('teacher')->group(function () {
     Route::get('/login', [TeacherAuthController::class, 'showLoginForm'])->name('teacher.login');

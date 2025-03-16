@@ -160,7 +160,7 @@
                             </a>
                         </div>
                         <div class="course-info-btn">
-                            <a href="{{ route('teacher.classes.show', $schoolClasse->id) }}" class="btn-five">
+                            <a href="#" class="btn-five" onclick="showTeacherSubjects(event)">
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </div>

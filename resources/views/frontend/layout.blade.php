@@ -10,6 +10,8 @@
   <!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/ubold/assets/images/SKGS.png') }}">
 
+	<link rel="stylesheet" href="{{ asset("platform/assets/css/monstyle.css") }}">
+
 	<!-- Theme Settings Js -->
 	<script src="{{ asset("platform/assets/js/theme-script.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
 
@@ -63,6 +65,7 @@
 	</div>
 	<!-- /Main Wrapper -->
 
+    <script src="{{ asset("platform/assets/js/monjs.js") }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
    <!-- jQuery -->

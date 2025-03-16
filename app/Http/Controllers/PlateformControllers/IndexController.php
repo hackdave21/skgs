@@ -37,4 +37,11 @@ class IndexController extends Controller
 
     return view('frontend.show', compact('schoolClasse'));
     }
+    public function getTeacherSubjects()
+{
+    $teacher = Auth::user();
+    $subjects = $teacher->subjects;
+
+    return response()->json($subjects);
+}
 }
