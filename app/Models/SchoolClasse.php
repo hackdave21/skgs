@@ -20,7 +20,5 @@ class SchoolClasse extends Model
     public function subjects()
 {
     return $this->hasMany(Subject::class, 'school_class_id');
-    // OU
-    // return $this->belongsToMany(Subject::class);
 }
 }

@@ -25,23 +25,45 @@ class IndexController extends Controller
            return view('frontend.index', compact('teachers_count', 'subjects_count', 'classes_count', 'students_count', 'schoolClasses'));
     }
 
-    public function show($id)
+    // public function show($id)
+    // {
+    //     $user = Auth::user();
+    //     $schoolClasse = $user->schoolClasses()
+    //     ->with(['students' => function($query) {
+    //         $query->orderBy('last_name')
+    //               ->orderBy('first_name');
+    //     }])
+    //     ->findOrFail($id);
+
+    // return view('frontend.show', compact('schoolClasse'));
+    // }
+    public function getTeacherSubjects(Request $request)
     {
-        $user = Auth::user();
-        $schoolClasse = $user->schoolClasses()
-        ->with(['students' => function($query) {
-            $query->orderBy('last_name')
-                  ->orderBy('first_name');
-        }])
-        ->findOrFail($id);
+        $teacher = Auth::user();
+        $schoolClassId = $request->query('school_class_id');
 
-    return view('frontend.show', compact('schoolClasse'));
+        if (!$schoolClassId) {
+            return response()->json(['error' => 'Aucune classe spécifiée'], 400);
+        }
+
+        // Vérifier que la classe appartient à l'enseignant
+        $schoolClass = $teacher->schoolClasses()->find($schoolClassId);
+        if (!$schoolClass) {
+            return response()->json(['error' => 'Classe non trouvée ou non autorisée'], 403);
+        }
+
+        // Récupérer les matières associées à cette classe pour l'enseignant
+        $subjects = $teacher->subjects()
+                            ->wherePivot('school_classe_id', $schoolClassId)
+                            ->get()
+                            ->map(function ($subject) use ($schoolClassId) {
+                                return [
+                                    'id' => $subject->id,
+                                    'name' => $subject->name,
+                                    'school_classe_id' => $schoolClassId,
+                                ];
+                            });
+
+        return response()->json($subjects);
     }
-    public function getTeacherSubjects()
-{
-    $teacher = Auth::user();
-    $subjects = $teacher->subjects;
-
-    return response()->json($subjects);
-}
 }

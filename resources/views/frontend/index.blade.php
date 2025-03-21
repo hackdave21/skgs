@@ -148,19 +148,20 @@
                 <div class="course-five-item">
                     <div class="course-five-grid">
                         <div class="course-icon-five">
-                            <div class="icon-five-border">
+                            {{-- <div class="icon-five-border">
                                 <a href="{{ route('teacher.classes.show', $schoolClasse->id) }}">
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="course-info-five">
-                            <a href="{{ route('teacher.classes.show', $schoolClasse->id) }}">
-                                <h3>{{ $schoolClasse->name }}</h3>
-                                <p>{{ $schoolClasse->students_count ?? 0 }} Élèves</p>
-                            </a>
+                            {{-- <a href="{{ route('teacher.classes.show', $schoolClasse->id) }}">
+
+                            </a> --}}
+                            <h3>{{ $schoolClasse->name }}</h3>
+                            <p>{{ $schoolClasse->students_count ?? 0 }} Élèves</p>
                         </div>
                         <div class="course-info-btn">
-                            <a href="#" class="btn-five" onclick="showTeacherSubjects(event)">
+                            <a href="#" class="btn-five" data-school-class-id="{{ $schoolClasse->id }}" onclick="showTeacherSubjects(event, {{ $schoolClasse->id }})">
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </div>

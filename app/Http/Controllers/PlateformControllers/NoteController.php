@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\PlateformControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Grade;
 use App\Models\SchoolClasse;
 use App\Models\Student;
 use App\Models\Subject;
@@ -13,13 +14,30 @@ class NoteController extends Controller
        /**
      * Affiche le formulaire pour saisir les notes d'un élève.
      */
-    public function showForm($SchoolClassId, $subjectId)
+    public function showForm($schoolClassId, $subjectId)
     {
-        $class = SchoolClasse::findOrFail($SchoolClassId);
+        $schoolClass = SchoolClasse::findOrFail($schoolClassId);
         $subject = Subject::findOrFail($subjectId);
-        $students = Student::where('class_id', $SchoolClassId)->get();
+        $students = Student::where('class_id', $schoolClassId)->get();
 
-        return view('frontend.notes', compact('class', 'subject', 'students'));
+        // Récupérer les notes existantes pour cette matière et cette classe
+        $grades = Grade::where('school_classe_id', $schoolClassId)
+                       ->where('subject_id', $subjectId)
+                       ->get()
+                       ->keyBy('student_id'); // Organiser par student_id
+
+        // Retourner une réponse JSON pour l'AJAX
+        if (request()->expectsJson()) {
+            return response()->json([
+                'schoolClass' => $schoolClass,
+                'subject' => $subject,
+                'students' => $students,
+                'grades' => $grades
+            ]);
+        }
+
+        // Retourner la vue si ce n'est pas une requête AJAX
+        return view('frontend.notes', compact('schoolClass', 'subject', 'students', 'grades'));
     }
 
     /**
@@ -28,26 +46,29 @@ class NoteController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'student_id' => 'required|exists:students,id',
             'school_class_id' => 'required|exists:school_classes,id',
             'subject_id' => 'required|exists:subjects,id',
             'notes' => 'required|array',
-            'notes.*.subject_id' => 'required|exists:subjects,id',
-            'notes.*.value' => 'required|numeric|min:0|max:20',
+            'notes.*' => 'numeric|min:0|max:20',
         ]);
 
-        $student = Student::findOrFail($request->student_id);
+        $schoolClassId = $request->school_class_id;
+        $subjectId = $request->subject_id;
 
-        $notesData = [];
-        foreach ($request->notes as $note) {
-            $notesData[$note['subject_id']] = ['note' => $note['value']];
+        foreach ($request->notes as $studentId => $note) {
+            Grade::updateOrCreate(
+                [
+                    'student_id' => $studentId,
+                    'school_classe_id' => $schoolClassId,
+                    'subject_id' => $subjectId,
+                ],
+                ['value' => $note]
+            );
         }
-
-        // Enregistrer les notes
-        $student->subjects()->syncWithoutDetaching($notesData);
 
         return response()->json(['success' => true, 'message' => 'Notes enregistrées avec succès']);
     }
+    
     public function getSubjects($schoolClassId, $studentId)
     {
         try {

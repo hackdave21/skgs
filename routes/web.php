@@ -88,7 +88,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/', function () {
     return redirect()->route('teacher.login');
 });
-Route::get('/teacher/subjects', [PlateformControllersIndexController::class, 'getTeacherSubjects'])->name('teacher.subjects');
+Route::get('/teacher/subjects', [App\Http\Controllers\PlateformControllers\IndexController::class, 'getTeacherSubjects'])->name('teacher.subjects');
 Route::get('index', [PlateformControllersIndexController::class, 'index'])->name('index');
 Route::prefix('teacher')->group(function () {
     Route::get('/login', [TeacherAuthController::class, 'showLoginForm'])->name('teacher.login');
@@ -101,10 +101,10 @@ Route::middleware(['auth'])->group(function () {
     ->name('frontend.index');
     Route::prefix('teacher')->name('teacher.')->group(function () {
         // Routes pour les classes
-        Route::prefix('classes')->name('classes.')->group(function () {
-            Route::get('/{id}', [PlateformControllersIndexController::class, 'show'])
-                ->name('show');
-        });
+        // Route::prefix('classes')->name('classes.')->group(function () {
+        //     Route::get('/{id}', [PlateformControllersIndexController::class, 'show'])
+        //         ->name('show');
+        // });
     });
 });
 
