@@ -13,10 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function showTeacherSubjects(event, schoolClasseId) {
-    event.preventDefault(); // Empêche le comportement par défaut
+    event.preventDefault();
     console.log("Fonction showTeacherSubjects appelée pour la classe:", schoolClasseId);
 
-    // Faire une requête AJAX pour récupérer les matières de l'enseignant pour cette classe
     fetch(`/teacher/subjects?school_class_id=${schoolClasseId}`, {
         headers: {
             'Accept': 'application/json',
@@ -25,28 +24,39 @@ function showTeacherSubjects(event, schoolClasseId) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Erreur réseau: ' + response.status);
+            return response.text().then(text => {
+                throw new Error(`Erreur réseau: ${response.status} - ${text}`);
+            });
         }
         return response.json();
     })
     .then(data => {
         console.log("Données reçues:", data);
-        // Créer un modal pour afficher les matières
+        console.log("Type de data:", typeof data);
+        console.log("Est-ce un tableau?", Array.isArray(data));
+        console.log("Contenu brut:", JSON.stringify(data));
+
         const subjectsModal = document.createElement('div');
         subjectsModal.className = 'modal subjects-modal';
         subjectsModal.style.display = 'block';
+
+        // Vérifier si des matières existent
+        const modalBodyContent = Array.isArray(data) && data.length > 0
+            ? data.map(subject => `
+                <button class="subject-btn" data-school-class="${subject.school_classe_id}" data-subject="${subject.id}">
+                    ${subject.name}
+                </button>
+            `).join('')
+            : '<p>Aucune matière trouvée pour cette classe.</p>';
+
         subjectsModal.innerHTML = `
             <div class="modal-content">
                 <div class="modal-header">
                     <h3>Vos matières pour la classe</h3>
-                    <span class="close">&times;</span>
+                    <span class="close">×</span>
                 </div>
                 <div class="modal-body">
-                    ${data.map(subject => `
-                        <button class="subject-btn" data-school-class="${subject.school_classe_id}" data-subject="${subject.id}">
-                            ${subject.name}
-                        </button>
-                    `).join('')}
+                    ${modalBodyContent}
                 </div>
             </div>
         `;
@@ -59,23 +69,33 @@ function showTeacherSubjects(event, schoolClasseId) {
         subjectsModal.style.left = '50%';
         subjectsModal.style.transform = 'translate(-50%, -50%)';
         subjectsModal.style.zIndex = '1000';
-        subjectsModal.querySelector('.modal-content').style.backgroundColor = 'white';
-        subjectsModal.querySelector('.modal-content').style.padding = '20px';
-        subjectsModal.querySelector('.modal-content').style.borderRadius = '10px';
-        subjectsModal.querySelector('.modal-content').style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+        const modalContent = subjectsModal.querySelector('.modal-content');
+        modalContent.style.backgroundColor = 'white';
+        modalContent.style.padding = '20px';
+        modalContent.style.borderRadius = '10px';
+        modalContent.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+
+        // Style des boutons (si présents)
+        subjectsModal.querySelectorAll('.subject-btn').forEach(btn => {
+            btn.style.display = 'block';
+            btn.style.margin = '10px 0';
+            btn.style.padding = '10px';
+            btn.style.backgroundColor = '#007bff';
+            btn.style.color = 'white';
+            btn.style.border = 'none';
+            btn.style.borderRadius = '5px';
+            btn.style.cursor = 'pointer';
+            btn.style.width = '100%';
+        });
 
         // Fermer le modal
         subjectsModal.querySelector('.close').onclick = () => subjectsModal.remove();
-
-        // Fermer le modal en cliquant en dehors
         const closeOnOutsideClick = (e) => {
-            if (!subjectsModal.querySelector('.modal-content').contains(e.target)) {
+            if (!modalContent.contains(e.target)) {
                 subjectsModal.remove();
                 document.removeEventListener('click', closeOnOutsideClick);
             }
         };
-
-        // Ajouter l'écouteur après un court délai pour éviter qu'il se déclenche immédiatement
         setTimeout(() => {
             document.addEventListener('click', closeOnOutsideClick);
         }, 100);
@@ -85,8 +105,8 @@ function showTeacherSubjects(event, schoolClasseId) {
             btn.addEventListener('click', () => {
                 const schoolClassId = btn.dataset.schoolClass;
                 const subjectId = btn.dataset.subject;
-                showStudentsModal(schoolClassId, subjectId); // Afficher le modal des élèves
-                subjectsModal.remove(); // Fermer le modal des matières
+                showStudentsModal(schoolClassId, subjectId);
+                subjectsModal.remove();
             });
         });
     })
@@ -95,7 +115,6 @@ function showTeacherSubjects(event, schoolClasseId) {
         alert('Erreur lors de la récupération des matières. Veuillez réessayer.');
     });
 }
-
 // Fonction pour afficher le modal des élèves
 function showStudentsModal(schoolClassId, subjectId) {
     console.log("Affichage des élèves pour la classe", schoolClassId, "et la matière", subjectId);

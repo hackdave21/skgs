@@ -9,16 +9,16 @@ class Subject extends Model
     protected $fillable = ['name'];
 
     public function users()
-    {
-        return $this->hasMany(User::class);
-    }
+{
+    return $this->belongsToMany(User::class, 'subject_teacher')
+                ->using(SubjectTeacher::class)
+                ->withPivot('school_classe_id')
+                ->withTimestamps();
+}
 
     public function grades()
     {
         return $this->hasMany(Grade::class);
     }
-    public function subjects()
-{
-    return $this->belongsToMany(Subject::class)->withPivot('note');
-}
+
 }

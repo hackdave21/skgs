@@ -25,8 +25,8 @@ class User extends Authenticatable
         'sex',
         'diplome',
         'password',
-        'subject_id',
-        'school_classe_id'
+        // 'subject_id',
+        // 'school_classe_id'
     ];
 
     /**
@@ -52,19 +52,20 @@ class User extends Authenticatable
         ];
     }
 
-    // public function subjects()
-    // {
-    //     return $this->belongsToMany(Subject::class);
-    // }
-
-    public function schoolClasses()
-    {
-        return $this->belongsToMany(SchoolClasse::class);
-    }
-    public function subjects()
+// Relation many-to-many avec Subject via SubjectTeacher
+public function subjects()
 {
-    return $this->belongsToMany(Subject::class, 'subject_teacher')
+    return $this->belongsToMany(Subject::class, 'subject_teacher', 'user_id', 'subject_id')
+                ->using(SubjectTeacher::class)
                 ->withPivot('school_classe_id');
+}
+
+// Relation many-to-many avec SchoolClasse via SubjectTeacher
+public function schoolClasses()
+{
+    return $this->belongsToMany(SchoolClasse::class, 'subject_teacher', 'user_id', 'school_classe_id')
+                ->withPivot('subject_id')
+                ->withTimestamps();
 }
 
 }

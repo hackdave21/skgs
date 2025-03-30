@@ -15,7 +15,7 @@ class TeacherController extends Controller
         $users = User::with(['subjects', 'schoolClasses'])->get();
         $subjects = Subject::all();
         $schoolClasses = SchoolClasse::all();
-        return view('admin.teachers.index', compact('users','subjects', 'schoolClasses'));
+        return view('admin.teachers.index', compact('users', 'subjects', 'schoolClasses'));
     }
 
     public function create()
@@ -51,8 +51,23 @@ class TeacherController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        $user->subjects()->attach($request->subject_ids);
-        $user->schoolClasses()->attach($request->school_classe_ids);
+        // Attacher les sujets avec les classes correspondantes
+        // foreach ($request->subject_ids as $subjectId) {
+        //     foreach ($request->school_classe_ids as $schoolClasseId) {
+        //         $user->subjects()->attach($subjectId, ['school_classe_id' => $schoolClasseId]);
+        //     }
+        // }
+        $data = [];
+        foreach ($request->subject_ids as $subjectId) {
+            foreach ($request->school_classe_ids as $schoolClasseId) {
+                $data[] = [
+                    'subject_id' => $subjectId,
+                    'school_classe_id' => $schoolClasseId,
+                ];
+            }
+        }
+        $user->subjects()->attach($data);
+
 
         return redirect()->route('admin.teachers.index')
             ->with('success', 'Enseignant ajouté avec succès');
@@ -91,8 +106,15 @@ class TeacherController extends Controller
             'diplome' => $request->diplome,
         ]);
 
-        $user->subjects()->sync($request->subject_ids);
-        $user->schoolClasses()->sync($request->school_classe_ids);
+        // D'abord, détacher toutes les relations existantes
+        $user->subjects()->detach();
+
+        // Puis attacher les nouvelles relations
+        foreach ($request->subject_ids as $subjectId) {
+            foreach ($request->school_classe_ids as $schoolClasseId) {
+                $user->subjects()->attach($subjectId, ['school_classe_id' => $schoolClasseId]);
+            }
+        }
 
         return redirect()->route('admin.teachers.index')
             ->with('success', 'Enseignant modifié avec succès');

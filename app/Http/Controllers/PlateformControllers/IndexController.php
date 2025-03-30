@@ -46,13 +46,11 @@ class IndexController extends Controller
             return response()->json(['error' => 'Aucune classe spécifiée'], 400);
         }
 
-        // Vérifier que la classe appartient à l'enseignant
         $schoolClass = $teacher->schoolClasses()->find($schoolClassId);
         if (!$schoolClass) {
             return response()->json(['error' => 'Classe non trouvée ou non autorisée'], 403);
         }
 
-        // Récupérer les matières associées à cette classe pour l'enseignant
         $subjects = $teacher->subjects()
                             ->wherePivot('school_classe_id', $schoolClassId)
                             ->get()
