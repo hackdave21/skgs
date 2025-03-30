@@ -64,4 +64,36 @@ class IndexController extends Controller
 
         return response()->json($subjects);
     }
+
+    public function getStudents(Request $request)
+{
+    $teacher = Auth::user();
+    $schoolClassId = $request->query('school_class_id');
+    $subjectId = $request->query('subject_id');
+
+    if (!$schoolClassId || !$subjectId) {
+        return response()->json(['error' => 'Classe ou matière non spécifiée'], 400);
+    }
+
+    // Vérifier si l'enseignant enseigne bien cette matière dans cette classe
+    $schoolClass = $teacher->schoolClasses()->find($schoolClassId);
+    if (!$schoolClass) {
+        return response()->json(['error' => 'Classe non trouvée ou non autorisée'], 403);
+    }
+
+    $isTeachingSubject = $teacher->subjects()
+        ->wherePivot('school_classe_id', $schoolClassId)
+        ->where('subjects.id', $subjectId)
+        ->exists();
+
+    if (!$isTeachingSubject) {
+        return response()->json(['error' => 'Vous n\'enseignez pas cette matière dans cette classe'], 403);
+    }
+
+    // Récupérer les élèves de cette classe
+    $students = Student::where('school_classe_id', $schoolClassId)->get();
+
+    return response()->json(['students' => $students]);
+}
+
 }

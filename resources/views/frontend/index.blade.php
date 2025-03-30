@@ -14,9 +14,9 @@
 
 							<!-- Banner Text -->
 							<div class="home-slide-five-text">
-								<h5>The Leader in Online Learning</h5>
-								<h1>Engaging & Accessible Online Courses For All</h1>
-								<p>Trusted by over 15K Users worldwide since 2024</p>
+								<h5>Numériser le domaine scolaire</h5>
+								<h1>Plus besoin de remplir les bulletins à la main</h1>
+								<p>Il vous suffit d'être connecté à votre compte et vous avez accès aux classes dans lesquelles vous intervenez selon les matières</p>
 							</div>
 							<!-- /Banner Text -->
 
@@ -68,10 +68,10 @@
 									</div>
 								</div>
 								<!-- Experience -->
-								<div class="rate-head-five d-flex align-items-center course-count">
+								{{-- <div class="rate-head-five d-flex align-items-center course-count">
 									<h2><span class="counterUp">10</span>+</h2>
 									<p>Years of experience tutors</p>
-								</div>
+								</div> --}}
 								<!-- /Experience -->
 							</div>
 							<!-- /Review and Experience -->

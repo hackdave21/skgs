@@ -96,17 +96,15 @@ Route::prefix('teacher')->group(function () {
     Route::post('/logout', [TeacherAuthController::class, 'logout'])->name('teacher.logout');
 });
     // Routes pour la gestion des classes des enseignants
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [PlateformControllersIndexController::class, 'index'])
-    ->name('frontend.index');
-    Route::prefix('teacher')->name('teacher.')->group(function () {
-        // Routes pour les classes
-        // Route::prefix('classes')->name('classes.')->group(function () {
-        //     Route::get('/{id}', [PlateformControllersIndexController::class, 'show'])
-        //         ->name('show');
-        // });
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/dashboard', [PlateformControllersIndexController::class, 'index'])
+            ->name('frontend.index');
+
+        Route::prefix('teacher')->name('teacher.')->group(function () {
+            Route::get('/students', [PlateformControllersIndexController::class, 'getStudents'])->name('students');
+        });
     });
-});
+
 
 // Routes pour la gestion des notes
 Route::prefix('notes')->group(function () {
