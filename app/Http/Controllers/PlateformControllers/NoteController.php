@@ -8,6 +8,7 @@ use App\Models\SchoolClasse;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
@@ -67,34 +68,6 @@ class NoteController extends Controller
         }
 
         return response()->json(['success' => true, 'message' => 'Notes enregistrées avec succès']);
-    }
-    
-    public function getSubjects($schoolClassId, $studentId)
-    {
-        try {
-            $student = Student::findOrFail($studentId);
-            $schoolClass = SchoolClasse::findOrFail($schoolClassId);
-            $subjects = Subject::all();
-            $student->load(['subjects' => function($query) {
-                $query->withPivot('note');
-            }]);
-
-            // Associer les notes aux matières
-            $subjectsWithNotes = $subjects->map(function($subject) use ($student) {
-                $existingNote = $student->subjects->firstWhere('id', $subject->id);
-                $subject->studentNotes = $existingNote ? [$existingNote] : [];
-                return $subject;
-            });
-
-            return response()->json([
-                'student' => $student,
-                'subjects' => $subjectsWithNotes
-            ]);
-        } catch (\Exception $e) {
-            // Ajout d'un log pour mieux déboguer
-            // \Log::error('Erreur dans getSubjects: ' . $e->getMessage());
-            return response()->json(['error' => 'Une erreur est survenue : ' . $e->getMessage()], 500);
-        }
     }
 
 

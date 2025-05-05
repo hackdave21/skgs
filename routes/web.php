@@ -90,6 +90,8 @@ Route::get('/', function () {
 });
 Route::get('/teacher/subjects', [App\Http\Controllers\PlateformControllers\IndexController::class, 'getTeacherSubjects'])->name('teacher.subjects');
 Route::get('index', [PlateformControllersIndexController::class, 'index'])->name('index');
+Route::get('/notes/{school_class_id}/{subject_id}', [App\Http\Controllers\PlateformControllers\IndexController::class, 'getStudents']);
+
 Route::prefix('teacher')->group(function () {
     Route::get('/login', [TeacherAuthController::class, 'showLoginForm'])->name('teacher.login');
     Route::post('/login', [TeacherAuthController::class, 'login'])->name('teacher.login.submit');
@@ -110,7 +112,6 @@ Route::prefix('teacher')->group(function () {
 Route::prefix('notes')->group(function () {
     Route::get('/{SchoolClassId}/{subjectId}', [NoteController::class, 'showForm'])->name('notes.form');
     Route::post('/store', [NoteController::class, 'store'])->name('notes.store');
-    Route::get('/get-subjects/{schoolClassId}/{studentId}', [NoteController::class, 'getSubjects'])->name('notes.getSubjects');
     Route::get('/{SchoolClassId}/{subjectId}/{studentId}/edit', [NoteController::class, 'edit'])->name('notes.edit');
     Route::put('/{SchoolClassId}/{subjectId}/{studentId}', [NoteController::class, 'update'])->name('notes.update');
 });

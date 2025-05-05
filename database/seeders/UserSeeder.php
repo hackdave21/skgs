@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('123456789'),
             // 'subject_id' => 1,
-            // 'school_classe_id' => 1,
+            'school_classe_id' => 1,
         ]);
 
         // Récupérer toutes les matières et attacher directement

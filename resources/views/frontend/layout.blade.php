@@ -1,101 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+	<title>SKGS </title>
+	<meta charset="UTF-8">
+	<meta name="description" content="WebUni Education Template">
+	<meta name="keywords" content="webuni, education, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->
+	<link href="/plateforme/img/favicon.ico" rel="shortcut icon"/>
 
-    <meta charset="utf-8" />
-    <title>@yield('title') | SKGS</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-  <!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/ubold/assets/images/SKGS.png') }}">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
 
-	<link rel="stylesheet" href="{{ asset("platform/assets/css/monstyle.css") }}">
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="/plateforme/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/plateforme/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="/plateforme/css/owl.carousel.css"/>
+	<link rel="stylesheet" href="/plateforme/css/style.css"/>
 
-	<!-- Theme Settings Js -->
-	<script src="{{ asset("platform/assets/js/theme-script.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="{{ asset("platform/assets/css/bootstrap.min.css") }}">
-
-	<!-- Fontawesome CSS -->
-	<link rel="stylesheet" href="{{ asset("platform/assets/plugins/fontawesome/css/fontawesome.min.css") }}">
-	<link rel="stylesheet" href="{{ asset("platform/assets/plugins/fontawesome/css/all.min.css") }}">
-
-	<!-- Owl Carousel CSS -->
-	<link rel="stylesheet" href="{{ asset("platform/assets/css/owl.carousel.min.css") }}">
-	<link rel="stylesheet" href="{{ asset("platform/assets/css/owl.theme.default.min.css") }}">
-
-	<!-- Slick CSS -->
-	<link rel="stylesheet" href="{{ asset("platform/assets/plugins/slick/slick.css") }}">
-	<link rel="stylesheet" href="{{ asset("platform/assets/plugins/slick/slick-theme.css") }}">
-
-	<!-- Select2 CSS -->
-	<link rel="stylesheet" href="{{ asset("platform/assets/plugins/select2/css/select2.min.css") }}">
-
-	<!-- Aos CSS -->
-	<link rel="stylesheet" href="{{ asset("platform/assets/plugins/aos/aos.css") }}">
-
-	<!-- Feathericon CSS -->
-	<link rel="stylesheet" href="{{ asset("platform/assets/css/feather.css") }}">
-
-	<!-- Main CSS -->
-	<link rel="stylesheet" href="{{ asset("platform/assets/css/style.css") }}">
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
 
 </head>
-
-
- <body class="home-five">
-
-
-    	<!-- Main Wrapper -->
-	<div class="main-wrapper">
-
-		<!-- Header -->
-        @include('frontend.components.header')
-		<!-- /Header -->
-
-        @yield('content')
-
-
-		<!-- Footer -->
-        @include('frontend.components.footer')
-		<!-- /Footer -->
-
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
 	</div>
-	<!-- /Main Wrapper -->
 
-    <script src="{{ asset("platform/assets/js/monjs.js") }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-   <!-- jQuery -->
-	<script src="{{ asset("platform/assets/js/jquery-3.7.1.min.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
-
-	<!-- Bootstrap Core JS -->
-	<script src="{{ asset("platform/assets/js/bootstrap.bundle.min.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
-
-	<!-- counterup JS -->
-	<script src="{{ asset("platform/assets/js/jquery.waypoints.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
-	<script src="{{ asset("platform/assets/js/jquery.counterup.min.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
-
-	<!-- Select2 JS -->
-	<script src="{{ asset("platform/assets/plugins/select2/js/select2.min.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
-
-	<!-- Owl Carousel -->
-	<script src="{{ asset("platform/assets/js/owl.carousel.min.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
-
-	<!-- Slick Slider -->
-	<script src="{{ asset("platform/assets/plugins/slick/slick.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
-
-	<!-- Aos -->
-	<script src="{{ asset("platform/assets/plugins/aos/aos.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
-
-	<!-- Custom JS -->
-	<script src="{{ asset("platform/assets/js/script.js") }}" type="832a7c381eebdb5575f29e68-text/javascript"></script>
-
-<script src="https://dreamslms.dreamstechnologies.com/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="832a7c381eebdb5575f29e68-|49" defer></script>
-@yield('scripts')
-</body>
+	<!-- Header section -->
+	@include('frontend.components.header')
+	<!-- Header section end -->
 
 
+	<!-- Hero section -->
+	@include('frontend.components.hero')
+	<!-- Hero section end -->
+
+
+	@yield('content')
+
+
+	<!-- banner section -->
+	<section class="banner-section spad">
+		<div class="container">
+			<div class="section-title mb-0 pb-2">
+				<h2>Join Our Community Now!</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+			</div>
+			<div class="text-center pt-5">
+				<a href="#" class="site-btn">Register Now</a>
+			</div>
+		</div>
+	</section>
+	<!-- banner section end -->
+
+
+	<!-- footer section -->
+	@include('frontend.components.footer')
+	<!-- footer section end -->
+
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="/plateforme/js/jquery-3.2.1.min.js"></script>
+	<script src="/plateforme/js/bootstrap.min.js"></script>
+	<script src="/plateforme/js/mixitup.min.js"></script>
+	<script src="/plateforme/js/circle-progress.min.js"></script>
+	<script src="/plateforme/js/owl.carousel.min.js"></script>
+	<script src="/plateforme/js/main.js"></script>
 </html>

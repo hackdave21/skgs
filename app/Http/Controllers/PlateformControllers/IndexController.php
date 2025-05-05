@@ -25,18 +25,6 @@ class IndexController extends Controller
            return view('frontend.index', compact('teachers_count', 'subjects_count', 'classes_count', 'students_count', 'schoolClasses'));
     }
 
-    // public function show($id)
-    // {
-    //     $user = Auth::user();
-    //     $schoolClasse = $user->schoolClasses()
-    //     ->with(['students' => function($query) {
-    //         $query->orderBy('last_name')
-    //               ->orderBy('first_name');
-    //     }])
-    //     ->findOrFail($id);
-
-    // return view('frontend.show', compact('schoolClasse'));
-    // }
     public function getTeacherSubjects(Request $request)
     {
         $teacher = Auth::user();
@@ -65,35 +53,38 @@ class IndexController extends Controller
         return response()->json($subjects);
     }
 
-    public function getStudents(Request $request)
+    public function getStudents($schoolClassId, $subjectId)
 {
     $teacher = Auth::user();
-    $schoolClassId = $request->query('school_class_id');
-    $subjectId = $request->query('subject_id');
 
-    if (!$schoolClassId || !$subjectId) {
-        return response()->json(['error' => 'Classe ou matière non spécifiée'], 400);
-    }
-
-    // Vérifier si l'enseignant enseigne bien cette matière dans cette classe
+    // Vérifier si l'enseignant a accès à cette classe et matière
     $schoolClass = $teacher->schoolClasses()->find($schoolClassId);
     if (!$schoolClass) {
         return response()->json(['error' => 'Classe non trouvée ou non autorisée'], 403);
     }
 
-    $isTeachingSubject = $teacher->subjects()
-        ->wherePivot('school_classe_id', $schoolClassId)
-        ->where('subjects.id', $subjectId)
-        ->exists();
-
-    if (!$isTeachingSubject) {
-        return response()->json(['error' => 'Vous n\'enseignez pas cette matière dans cette classe'], 403);
+    $subject = $teacher->subjects()->wherePivot('school_classe_id', $schoolClassId)->find($subjectId);
+    if (!$subject) {
+        return response()->json(['error' => 'Matière non trouvée ou non autorisée'], 403);
     }
 
-    // Récupérer les élèves de cette classe
+    // Récupérer les élèves inscrits dans la classe
     $students = Student::where('school_classe_id', $schoolClassId)->get();
 
-    return response()->json(['students' => $students]);
+    // Optionnel : Récupérer les notes des élèves si elles existent
+    $grades = [];
+    foreach ($students as $student) {
+        $grades[$student->id] = [
+            'value' => $student->grades()->where('subject_id', $subjectId)->value('grade')
+        ];
+    }
+
+    return response()->json([
+        'subject' => ['id' => $subject->id, 'name' => $subject->name],
+        'students' => $students,
+        'grades' => $grades
+    ]);
 }
+
 
 }

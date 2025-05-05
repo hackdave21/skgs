@@ -4,311 +4,200 @@
 
 @section('content')
 
-
-    <!-- Home Banner -->
-		<section class="home-slide-five">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-lg-6 col-12">
-						<div class="home-slide-five-face" data-aos="fade-down">
-
-							<!-- Banner Text -->
-							<div class="home-slide-five-text">
-								<h5>Numériser le domaine scolaire</h5>
-								<h1>Plus besoin de remplir les bulletins à la main</h1>
-								<p>Il vous suffit d'être connecté à votre compte et vous avez accès aux classes dans lesquelles vous intervenez selon les matières</p>
-							</div>
-							<!-- /Banner Text -->
-
-							<!-- banner Seach Category -->
-							{{-- <div class="banner-content-five">
-								<form class="form" action="https://dreamslms.dreamstechnologies.com/html/course-list.html">
-									<div class="form-inner-five">
-										<div class="input-group">
-											<!-- Slect Category -->
-											<span class="drop-detail-five">
-												<select class="form-select select">
-													<option>Category</option>
-													<option>Angular</option>
-													<option>Node Js</option>
-													<option>React</option>
-													<option>Python</option>
-												</select>
-											</span>
-											<!-- Slect Category -->
-
-											<!-- Search -->
-											<input type="email" class="form-control"
-												placeholder="Search School, Online eductional centers, etc">
-											<!-- Search -->
-
-											<!-- Submit Button -->
-											<button class="btn btn-primary sub-btn" type="submit"><span><i
-														class="fa-solid fa-magnifying-glass"></i></span></button>
-											<!-- Submit Button -->
-										</div>
-									</div>
-								</form>
-							</div> --}}
-							<!-- /banner Seach Category -->
-
-							<!-- Review and Experience -->
-							<div class="review-five-group">
-								<div class="review-user-five  d-flex align-items-center">
-
-									<div class="review-rating-five">
-										<div class="rating-star">
-											<p>5.5</p>
-											<i class="fas fa-star filled"></i>
-											<i class="fas fa-star filled"></i>
-											<i class="fas fa-star filled"></i>
-											<i class="fas fa-star filled"></i>
-											<i class="fas fa-star filled"></i>
-										</div>
-									</div>
-								</div>
-								<!-- Experience -->
-								{{-- <div class="rate-head-five d-flex align-items-center course-count">
-									<h2><span class="counterUp">10</span>+</h2>
-									<p>Years of experience tutors</p>
-								</div> --}}
-								<!-- /Experience -->
-							</div>
-							<!-- /Review and Experience -->
-						</div>
-					</div>
-					<div class="col-lg-6 col-12">
-						<div class="banner-slider-img">
-							<div class="row">
-								<div class="col-lg-6">
-									<div class="slider-five-two aos" data-aos="fade-down">
-										<img src="{{ asset("platform/assets/img/a3.png") }}" alt="Img">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="vector-shapes-five">
-					<img src="{{ asset("platform/assets/img/bg/banner-vector.svg") }}" alt="Img">
-				</div>
-			</div>
-		</section>
-		<!-- /Home Banner -->
-
-		<!-- Leading Companies -->
-		<section class="leading-section-five">
-			<div class="container">
-				<div class="row align-items-center">
-					<div data-aos="fade-down" style="display: flex">
-                        <div class="leading-five-content course-count">
-							<h2>
-                                Bonjour
-                                @if(auth()->user()->sex === 'Masculin')
-                                    Monsieur
-                                @else
-                                    Madame
-                                @endif
-                                <mark style="color: orange">
-                                    {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
-                                </mark>
-                            </h2>
-							<p>Bienvenue sur votre compte de SKGS
-                                </p>
-						</div>
-						<div class="leading-five-content course-count">
-							<h2>Pourquoi  SKGS ?</h2>
-							<p>L'objectif est en fait de numériser la génération des bulletins
-                                 scolaire et de faciliter les enseignant dans leurs tâches.
-                                </p>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</section>
-		<!-- /Leading Companies -->
-
-<!-- Course Categories Five -->
-<section class="course-section-five">
+<!-- categories section -->
+<section class="categories-section spad">
     <div class="container">
-        <div class="header-five-title text-center" data-aos="fade-down">
-            <h2>Vos classes</h2>
-            <p>Ici les classes dans lesquelles vous intervenez, veuillez cliquer pour avoir accès à la classe pour la saisie des notes</p>
+        <div class="section-title">
+            <h2>Our Course Categories</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
         </div>
-        <div class="owl-carousel home-five-course owl-theme aos">
-            @php
-                // Utiliser une collection unique basée sur l'ID de la classe
-                $uniqueClasses = $schoolClasses->unique('id');
-            @endphp
+        <div class="row">
+            <!-- categorie -->
+            <div class="col-lg-4 col-md-6">
+                <div class="categorie-item">
+                    <div class="ci-thumb set-bg" data-setbg="/plateforme/img/categories/1.jpg"></div>
+                    <div class="ci-text">
+                        <h5>IT Development</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                        <span>120 Courses</span>
+                    </div>
+                </div>
+            </div>
+            <!-- categorie -->
+            <div class="col-lg-4 col-md-6">
+                <div class="categorie-item">
+                    <div class="ci-thumb set-bg" data-setbg="/plateforme/img/categories/2.jpg"></div>
+                    <div class="ci-text">
+                        <h5>Web Design</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                        <span>70 Courses</span>
+                    </div>
+                </div>
+            </div>
+            <!-- categorie -->
+            <div class="col-lg-4 col-md-6">
+                <div class="categorie-item">
+                    <div class="ci-thumb set-bg" data-setbg="/plateforme/img/categories/3.jpg"></div>
+                    <div class="ci-text">
+                        <h5>Illustration & Drawing</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur</p>
+                        <span>55 Courses</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- categories section end -->
 
-            @foreach($uniqueClasses as $schoolClasse)
-            <!-- Carousel Item -->
-            <div class="carousel-five-item" data-aos="fade-down">
-                <div class="course-five-item">
-                    <div class="course-five-grid">
-                        <div class="course-icon-five">
-                            {{-- <div class="icon-five-border">
-                                <a href="{{ route('teacher.classes.show', $schoolClasse->id) }}">
-                                </a>
-                            </div> --}}
-                        </div>
-                        <div class="course-info-five">
-                            {{-- <a href="{{ route('teacher.classes.show', $schoolClasse->id) }}">
 
-                            </a> --}}
-                            <h3>{{ $schoolClasse->name }}</h3>
-                            <p>{{ $schoolClasse->students_count ?? 0 }} Élèves</p>
+<!-- search section -->
+<section class="search-section">
+    <div class="container">
+        <div class="search-warp">
+            <div class="section-title text-white">
+                <h2>Search your course</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <!-- search form -->
+                    <form class="course-search-form">
+                        <input type="text" placeholder="Course">
+                        <input type="text" class="last-m" placeholder="Category">
+                        <button class="site-btn">Search Couse</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- search section end -->
+
+
+<!-- course section -->
+<section class="course-section spad">
+    <div class="container">
+        <div class="section-title mb-0">
+            <h2>Featured Courses</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+        </div>
+    </div>
+    <div class="course-warp">
+        <ul class="course-filter controls">
+            <li class="control active" data-filter="all">All</li>
+            <li class="control" data-filter=".finance">Finance</li>
+            <li class="control" data-filter=".design">Design</li>
+            <li class="control" data-filter=".web">Web Development</li>
+            <li class="control" data-filter=".photo">Photography</li>
+        </ul>
+        <div class="row course-items-area">
+            <!-- course -->
+            <div class="mix col-lg-3 col-md-4 col-sm-6 finance">
+                <div class="course-item">
+                    <div class="course-thumb set-bg" data-setbg="/plateforme/img/courses/1.jpg">
+                        <div class="price">Price: $15</div>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-text">
+                            <h5>Art & Crafts</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur</p>
+                            <div class="students">120 Students</div>
                         </div>
-                        <div class="course-info-btn">
-                            <a href="#" class="btn-five" data-school-class-id="{{ $schoolClasse->id }}" onclick="showTeacherSubjects(event, {{ $schoolClasse->id }})">
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
+                        <div class="course-author">
+                            <div class="ca-pic set-bg" data-setbg="/plateforme/img/authors/1.jpg"></div>
+                            <p>William Parker, <span>Developer</span></p>
                         </div>
                     </div>
                 </div>
             </div>
-            @endforeach
+            <!-- course -->
+            <div class="mix col-lg-3 col-md-4 col-sm-6 design">
+                <div class="course-item">
+                    <div class="course-thumb set-bg" data-setbg="/plateforme/img/courses/2.jpg">
+                        <div class="price">Price: $15</div>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-text">
+                            <h5>IT Development</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur</p>
+                            <div class="students">120 Students</div>
+                        </div>
+                        <div class="course-author">
+                            <div class="ca-pic set-bg" data-setbg="/plateforme/img/authors/2.jpg"></div>
+                            <p>William Parker, <span>Developer</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- course -->
+            <div class="mix col-lg-3 col-md-4 col-sm-6 web">
+                <div class="course-item">
+                    <div class="course-thumb set-bg" data-setbg="/plateforme/img/courses/3.jpg">
+                        <div class="price">Price: $15</div>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-text">
+                            <h5>Graphic Design</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur</p>
+                            <div class="students">120 Students</div>
+                        </div>
+                        <div class="course-author">
+                            <div class="ca-pic set-bg" data-setbg="/plateforme/img/authors/3.jpg"></div>
+                            <p>William Parker, <span>Developer</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- course -->
+            <div class="mix col-lg-3 col-md-4 col-sm-6 photo">
+                <div class="course-item">
+                    <div class="course-thumb set-bg" data-setbg="/plateforme/img/courses/4.jpg">
+                        <div class="price">Price: $15</div>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-text">
+                            <h5>IT Development</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur</p>
+                            <div class="students">120 Students</div>
+                        </div>
+                        <div class="course-author">
+                            <div class="ca-pic set-bg" data-setbg="/plateforme/img/authors/4.jpg"></div>
+                            <p>William Parker, <span>Developer</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
-<!-- Course Categories Five -->
+<!-- course section end -->
 
-		<!-- Counter Five-->
-		<section class="counter-section-five">
-			<div class="container">
-				<div class="row align-items-center text-center justify-content-between">
-					<!-- col -->
-					<div class="col-lg-3 col-md-3 col-sm-12" data-aos="fade-down">
-						<div class="count-five">
-							<div class="count-content-five course-count ms-0">
-								<h4><span class="counterUp">{{$students_count}}</span></h4>
-								<p class="mb-0">Elèves</p>
-							</div>
-						</div>
-					</div>
-					<!--/ col -->
 
-					<!-- col -->
-					<div class="col-lg-3 col-md-3 col-sm-12" data-aos="fade-down">
-						<div class="count-five">
-							<div class="count-content-five course-count ms-0">
-								<h4><span class="counterUp">{{$teachers_count}}</span></h4>
-								<p class="mb-0">Enseigants</p>
-							</div>
-						</div>
-					</div>
-					<!--/ col -->
-
-					<!-- col -->
-					<div class="col-lg-3 col-md-3 col-sm-12" data-aos="fade-down">
-						<div class="count-five">
-							<div class="count-content-five course-count ms-0">
-								<h4><span class="counterUp">{{$subjects_count}}</span></h4>
-								<p class="mb-0">Matières</p>
-							</div>
-						</div>
-					</div>
-					<!--/ col -->
-
-					<!-- col -->
-					<div class="col-lg-3 col-md-3 col-sm-12" data-aos="fade-down">
-						<div class="count-five count-five-last count-five-0">
-							<div class="count-content-five course-count ms-0">
-								<h4><span class="counterUp">58,370</span></h4>
-								<p class="mb-0">Bulletins scolaires</p>
-							</div>
-						</div>
-					</div>
-					<!--/ col -->
-
-				</div>
-			</div>
-		</section>
-		<!-- /Counter Five-->
-
-		<!-- Master the skills Five -->
-		<section class="master-section-five">
-			<div class="container">
-				<div class="master-five-vector">
-					<img class="ellipse-right" src="{{ asset("platform/assets/img/bg/master-vector-left.svg") }}" alt="Img">
-				</div>
-				<div class="row">
-					<div class="col-lg-6 col-sm-12" data-aos="fade-down">
-						<div class="section-five-sub">
-							<div class="header-five-title">
-								<h2>C'est quoi SKGS</h2>
-								<p>La plateforme dédiée aux enseignants</p>
-							</div>
-							<div class="career-five-content">
-								<p data-aos="fade-down">Get certified, master modern tech skills, and level up your
-									career — whether you’re starting out or a seasoned pro. 95% .</p>
-								<p class="mb-0" data-aos="fade-down">Get certified, master modern tech skills, and level
-									up your career — whether you’re starting out or a seasoned pro. 95% of eLearning
-									learners report our hands-on content directly helped their careers.</p>
-							</div>
-							<a href="course-list.html" class="learn-more-five">Contactez l'administration</a>
-						</div>
-					</div>
-					<div class="col-lg-6 col-sm-12">
-						<div class="row">
-                            <img src="{{ asset("platform/assets/img/a2.png") }}" alt="enseignant">
-							{{-- <div class="col-lg-6 col-sm-6" data-aos="fade-down">
-								<div class="skill-five-item">
-									<div class="skill-five-icon">
-										<img src="assets/img/skills/skills-01.svg" class="bg-warning"
-											alt="Stay motivated">
-									</div>
-									<div class="skill-five-content">
-										<h3>Stay motivated with engaging instructors</h3>
-										<p>eLearning learners report our hands-on content directly helped their careers.
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-sm-6" data-aos="fade-down">
-								<div class="skill-five-item">
-									<div class="skill-five-icon">
-										<img src="{{ asset("platform/assets/img/skills/skills-02.svg") }}" class="bg-info" alt="Stay motivated">
-									</div>
-									<div class="skill-five-content">
-										<h3>Keep up with in the latest in cloud</h3>
-										<p>eLearning learners report our hands-on content directly helped their careers.
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-sm-6" data-aos="fade-down">
-								<div class="skill-five-item">
-									<div class="skill-five-icon">
-										<img src="assets/img/skills/skills-03.svg" class="bg-danger"
-											alt="Stay motivated">
-									</div>
-									<div class="skill-five-content">
-										<h3>Get certified with 100+ certification courses</h3>
-										<p>eLearning learners report our hands-on content directly helped their careers.
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-sm-6" data-aos="fade-down">
-								<div class="skill-five-item">
-									<div class="skill-five-icon">
-										<img src="assets/img/skills/skills-04.svg" class="bg-light-green"
-											alt="Stay motivated">
-									</div>
-									<div class="skill-five-content">
-										<h3>Build skills your way, from labs to courses</h3>
-										<p>eLearning learners report our hands-on content directly helped their careers.
-										</p>
-									</div>
-								</div>
-							</div> --}}
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- /Master the skills Five -->
+<!-- signup section -->
+<section class="signup-section spad">
+    <div class="signup-bg set-bg" data-setbg="/plateforme/img/signup-bg.jpg"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="signup-warp">
+                    <div class="section-title text-white text-left">
+                        <h2>Sign up to became a teacher</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+                    </div>
+                    <!-- signup form -->
+                    <form class="signup-form">
+                        <input type="text" placeholder="Your Name">
+                        <input type="text" placeholder="Your E-mail">
+                        <input type="text" placeholder="Your Phone">
+                        <label for="v-upload" class="file-up-btn">Upload Course</label>
+                        <input type="file" id="v-upload">
+                        <button class="site-btn">Search Couse</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- signup section end -->
 
 @endsection
