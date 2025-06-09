@@ -82,7 +82,7 @@
 
 
     <!-- course section -->
-    <section class="course-section spad">
+    <section class="course-section spad" id="classe">
         <div class="container">
             <div class="section-title mb-0">
                 <h2>Mes Classes par Matière</h2>

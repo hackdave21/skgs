@@ -39,7 +39,7 @@
                                 <td>{{ $student->matricule_number }}</td>
 
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-outline-info">Profil</a>
+                                    <a href="#" class="btn btn-sm btn-outline-info">Voir</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -54,11 +54,6 @@
             </div>
         </div>
 
-        <div class="mt-4">
-            <a href="#" class="btn btn-secondary">
-                <i class="fa fa-arrow-left me-2"></i> Retour aux classes
-            </a>
-        </div>
     </div>
 </section>
 @endsection
