@@ -166,7 +166,7 @@
                         <textarea placeholder="Décrivez votre demande..."></textarea>
                         <label for="v-upload" class="file-up-btn">Joindre un document</label>
                         <input type="file" id="v-upload">
-                        <button class="site-btn">Envoyer le signalement</button>
+                        <button class="site-btn">Envoyer</button>
                     </form>
                 </div>
             </div>

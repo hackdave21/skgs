@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-3">
                 <div class="site-logo">
-                    <img src="/plateforme/img/logo.png" alt="">
+                    <img src="/plateforme/img/skgslogo.png" alt="">
                 </div>
                 <div class="nav-switch">
                     <i class="fa fa-bars"></i>
@@ -14,9 +14,8 @@
                 <nav class="main-menu">
                     <ul>
                         <li><a href="index.html">Acceuil</a></li>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="courses.html">Courses</a></li>
-                        <li><a href="blog.html">News</a></li>
+                        <li><a href="#">A propos</a></li>
+                        <li><a href="courses.html">Classes</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>

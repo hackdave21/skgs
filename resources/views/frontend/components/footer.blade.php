@@ -2,51 +2,43 @@
     <div class="footer-top">
         <div class="footer-warp">
             <div class="row">
+                 <div class="widget-item">
+                     <div class="site-logo">
+                    <img src="/plateforme/img/bleu.png" alt="">
+                </div>
+                </div>
                 <div class="widget-item">
-                    <h4>Contact Info</h4>
+                    <h4>Coordonnées</h4>
                     <ul class="contact-list">
-                        <li>1481 Creekside Lane <br>Avila Beach, CA 931</li>
-                        <li>+53 345 7953 32453</li>
-                        <li>yourmail@gmail.com</li>
+                        <li>Adresse de l'établissement<br>Ville, Code postal</li>
+                        <li>Téléphone: +212 XXX XXX XXX</li>
+                        <li>Email: contact@skgs.ma</li>
                     </ul>
                 </div>
                 <div class="widget-item">
-                    <h4>Engeneering</h4>
+                    <h4>Navigation</h4>
                     <ul>
-                        <li><a href="">Applied Studies</a></li>
-                        <li><a href="">Computer Engeneering</a></li>
-                        <li><a href="">Software Engeneering</a></li>
-                        <li><a href="">Informational Engeneering</a></li>
-                        <li><a href="">System Engeneering</a></li>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Classes</a></li>
+                        <li><a href="#">A propos</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
                 <div class="widget-item">
-                    <h4>Graphic Design</h4>
+                    <h4>Ressources</h4>
                     <ul>
-                        <li><a href="">Applied Studies</a></li>
-                        <li><a href="">Computer Engeneering</a></li>
-                        <li><a href="">Software Engeneering</a></li>
-                        <li><a href="">Informational Engeneering</a></li>
-                        <li><a href="">System Engeneering</a></li>
+                        <li><a href="#">Guide d'utilisation</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support technique</a></li>
                     </ul>
                 </div>
                 <div class="widget-item">
-                    <h4>Development</h4>
+                    <h4>Accès rapide</h4>
                     <ul>
-                        <li><a href="">Applied Studies</a></li>
-                        <li><a href="">Computer Engeneering</a></li>
-                        <li><a href="">Software Engeneering</a></li>
-                        <li><a href="">Informational Engeneering</a></li>
-                        <li><a href="">System Engeneering</a></li>
+                        <li><a href="#">Tableau de bord</a></li>
+                        <li><a href="#">Saisie des notes</a></li>
+                        <li><a href="#">Bulletins</a></li>
                     </ul>
-                </div>
-                <div class="widget-item">
-                    <h4>Newsletter</h4>
-                    <form class="footer-newslatter">
-                        <input type="email" placeholder="E-mail">
-                        <button class="site-btn">Subscribe</button>
-                        <p>*We don’t spam</p>
-                    </form>
                 </div>
             </div>
         </div>
@@ -54,13 +46,13 @@
     <div class="footer-bottom">
         <div class="footer-warp">
             <ul class="footer-menu">
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Register</a></li>
-                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Confidentialité</a></li>
+                <li><a href="#">Conditions d'utilisation</a></li>
             </ul>
-            <div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+            <div class="copyright">
+                &copy; <script>document.write(new Date().getFullYear());</script> Plateforme SKGS - Tous droits réservés
+            </div>
         </div>
     </div>
 </footer>

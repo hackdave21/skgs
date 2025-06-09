@@ -45,7 +45,7 @@
 
 
 	<!-- banner section -->
-	<section class="banner-section spad">
+	{{-- <section class="banner-section spad">
 		<div class="container">
 			<div class="section-title mb-0 pb-2">
 				<h2>Join Our Community Now!</h2>
@@ -55,7 +55,7 @@
 				<a href="#" class="site-btn">Register Now</a>
 			</div>
 		</div>
-	</section>
+	</section> --}}
 	<!-- banner section end -->
 
 

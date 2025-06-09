@@ -1,10 +1,11 @@
 <section class="hero-section set-bg" data-setbg="/plateforme/img/bg.jpg">
     <div class="container">
-        <div class="hero-text text-white">
-            <h2>Get The Best Free Online Courses</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla <br> dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
-        </div>
-        <div class="row">
+       <div class="hero-text text-white">
+    <h2>SKGS - Plateforme de Gestion Scolaire</h2>
+    <p>Bienvenue sur votre espace enseignant dédié à la saisie et au suivi des notes.<br>
+    Enregistrez et gérez facilement les résultats de vos élèves par classe et par matière.</p>
+</div>
+        {{-- <div class="row">
             <div class="col-lg-10 offset-lg-1">
                 <form class="intro-newslatter">
                     <input type="text" placeholder="Name">
@@ -12,6 +13,6 @@
                     <button class="site-btn">Sign Up Now</button>
                 </form>
             </div>
-        </div>
+        </div> --}}
     </div>
 </section>
