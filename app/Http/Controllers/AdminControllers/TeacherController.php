@@ -12,7 +12,13 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        $users = User::with(['subjects', 'schoolClasses'])->get();
+        // CORRECTION: Récupérer les relations avec distinct() pour éviter les doublons
+        $users = User::with(['subjects' => function($query) {
+            $query->distinct();
+        }, 'schoolClasses' => function($query) {
+            $query->distinct();
+        }])->get();
+
         $subjects = Subject::all();
         $schoolClasses = SchoolClasse::all();
         return view('admin.teachers.index', compact('users', 'subjects', 'schoolClasses'));
@@ -51,23 +57,14 @@ class TeacherController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        // Attacher les sujets avec les classes correspondantes
-        // foreach ($request->subject_ids as $subjectId) {
-        //     foreach ($request->school_classe_ids as $schoolClasseId) {
-        //         $user->subjects()->attach($subjectId, ['school_classe_id' => $schoolClasseId]);
-        //     }
-        // }
-        $data = [];
+        // CORRECTION: Attacher chaque matière avec chaque classe individuellement
         foreach ($request->subject_ids as $subjectId) {
             foreach ($request->school_classe_ids as $schoolClasseId) {
-                $data[] = [
-                    'subject_id' => $subjectId,
-                    'school_classe_id' => $schoolClasseId,
-                ];
+                $user->subjects()->attach($subjectId, [
+                    'school_classe_id' => $schoolClasseId
+                ]);
             }
         }
-        $user->subjects()->attach($data);
-
 
         return redirect()->route('admin.teachers.index')
             ->with('success', 'Enseignant ajouté avec succès');
@@ -75,7 +72,13 @@ class TeacherController extends Controller
 
     public function edit($id)
     {
-        $users = User::with(['subjects', 'schoolClasses'])->findOrFail($id);
+        // CORRECTION: Utiliser les relations distinctes pour l'édition aussi
+        $users = User::with(['subjects' => function($query) {
+            $query->distinct();
+        }, 'schoolClasses' => function($query) {
+            $query->distinct();
+        }])->findOrFail($id);
+
         $subjects = Subject::all();
         $schoolClasses = SchoolClasse::all();
         return view('admin.teachers.edit', compact('users', 'subjects', 'schoolClasses'));
@@ -126,7 +129,7 @@ class TeacherController extends Controller
 
         // Détacher toutes les relations avant la suppression
         $user->subjects()->detach();
-        $user->schoolClasses()->detach();
+        // Pas besoin de détacher schoolClasses car c'est la même table pivot
         $user->delete();
 
         return redirect()->route('admin.teachers.index')

@@ -25,8 +25,8 @@ class User extends Authenticatable
         'sex',
         'diplome',
         'password',
-        // 'subject_id',
-        // 'school_classe_id'
+        'subject_id',
+        'school_classe_id'
     ];
 
     /**
@@ -67,5 +67,7 @@ public function schoolClasses()
                 ->withPivot('subject_id')
                 ->withTimestamps();
 }
+
+
 
 }

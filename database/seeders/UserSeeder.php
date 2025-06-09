@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
+     /**
      * Run the database seeds.
      */
     public function run(): void
@@ -25,20 +25,21 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456789'),
-            // 'subject_id' => 1,
+            'subject_id' => 1,
             'school_classe_id' => 1,
         ]);
 
-        // Récupérer toutes les matières et attacher directement
+        // Récupérer toutes les matières et toutes les classes
         $subjects = Subject::all();
-        foreach($subjects as $subject) {
-            $admin->subjects()->attach($subject->id);
-        }
-
-        // Récupérer toutes les classes et attacher directement
         $classes = SchoolClasse::all();
-        foreach($classes as $class) {
-            $admin->schoolClasses()->attach($class->id);
+
+        // Attacher chaque matière à chaque classe pour cet enseignant
+        foreach($subjects as $subject) {
+            foreach($classes as $class) {
+                $admin->subjects()->attach($subject->id, [
+                    'school_classe_id' => $class->id
+                ]);
+            }
         }
     }
 }

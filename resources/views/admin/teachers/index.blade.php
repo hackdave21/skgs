@@ -52,19 +52,18 @@
                                     <td>{{ $user->diplome }}</td>
 
                                     <td>
-                                        @if ($user->subjects)
-                                            {{ implode(', ', $user->subjects->map(function ($subject) {
-                                                return $subject->name;
-                                            })->toArray()) }}
+                                        @if ($user->subjects && $user->subjects->count() > 0)
+                                            {{-- CORRECTION: Utiliser unique() pour éliminer les doublons --}}
+                                            {{ $user->subjects->unique('id')->pluck('name')->implode(', ') }}
                                         @else
                                             Aucune matière
                                         @endif
                                     </td>
+
                                     <td>
-                                        @if ($user->schoolClasses)
-                                            {{ implode(', ', $user->schoolClasses->map(function ($schoolClass) {
-                                                return $schoolClass->name;
-                                            })->toArray()) }}
+                                        @if ($user->schoolClasses && $user->schoolClasses->count() > 0)
+                                            {{-- CORRECTION: Utiliser unique() pour éliminer les doublons --}}
+                                            {{ $user->schoolClasses->unique('id')->pluck('name')->implode(', ') }}
                                         @else
                                             Aucune classe
                                         @endif
