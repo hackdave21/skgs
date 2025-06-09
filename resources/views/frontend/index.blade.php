@@ -4,51 +4,54 @@
 
 @section('content')
 
-<!-- categories section -->
+<!-- matières section -->
 <section class="categories-section spad">
     <div class="container">
         <div class="section-title">
-            <h2>Our Course Categories</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+            <h2>Mes Matières Enseignées</h2>
+            <p>Découvrez les différentes matières que j'enseigne et les classes dans lesquelles j'interviens.</p>
         </div>
         <div class="row">
-            <!-- categorie -->
-            <div class="col-lg-4 col-md-6">
-                <div class="categorie-item">
-                    <div class="ci-thumb set-bg" data-setbg="/plateforme/img/categories/1.jpg"></div>
-                    <div class="ci-text">
-                        <h5>IT Development</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                        <span>120 Courses</span>
+            @if(auth()->user()->subjects && auth()->user()->subjects->count() > 0)
+                @foreach(auth()->user()->subjects->unique('id') as $subject)
+                    <!-- matière -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="categorie-item">
+                            <div class="ci-thumb">
+                                <i class="fa fa-file-text" style="font-size: 48px; color: #007bff; display: flex; justify-content: center; align-items: center; height: 100%; min-height: 200px;"></i>
+                            </div>
+                            <div class="ci-text">
+                                <h5>{{ $subject->name }}</h5>
+                                <p>{{ $subject->description ?? 'Matière enseignée avec passion et expertise' }}</p>
+                                <span>
+                                    @php
+                                        // Récupérer les classes pour cette matière spécifique
+                                        $classesForSubject = auth()->user()->schoolClasses()
+                                            ->wherePivot('subject_id', $subject->id)
+                                            ->get();
+                                    @endphp
+                                    @if($classesForSubject->count() > 0)
+                                        {{ $classesForSubject->count() }} {{ $classesForSubject->count() > 1 ? 'Classes' : 'Classe' }}
+                                    @else
+                                        Aucune classe assignée
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <div class="col-12">
+                    <div class="text-center">
+                        <h4>Aucune matière assignée</h4>
+                        <p>Contactez l'administration pour l'assignation de matières.</p>
                     </div>
                 </div>
-            </div>
-            <!-- categorie -->
-            <div class="col-lg-4 col-md-6">
-                <div class="categorie-item">
-                    <div class="ci-thumb set-bg" data-setbg="/plateforme/img/categories/2.jpg"></div>
-                    <div class="ci-text">
-                        <h5>Web Design</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                        <span>70 Courses</span>
-                    </div>
-                </div>
-            </div>
-            <!-- categorie -->
-            <div class="col-lg-4 col-md-6">
-                <div class="categorie-item">
-                    <div class="ci-thumb set-bg" data-setbg="/plateforme/img/categories/3.jpg"></div>
-                    <div class="ci-text">
-                        <h5>Illustration & Drawing</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                        <span>55 Courses</span>
-                    </div>
-                </div>
-            </div>
+            @endif
         </div>
     </div>
 </section>
-<!-- categories section end -->
+<!-- matières section end -->
 
 
 <!-- search section -->
@@ -56,15 +59,15 @@
     <div class="container">
         <div class="search-warp">
             <div class="section-title text-white">
-                <h2>Search your course</h2>
+                <h2>Rechercher une matière</h2>
             </div>
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <!-- search form -->
                     <form class="course-search-form">
-                        <input type="text" placeholder="Course">
-                        <input type="text" class="last-m" placeholder="Category">
-                        <button class="site-btn">Search Couse</button>
+                        <input type="text" placeholder="matière">
+                        {{-- <input type="text" class="last-m" placeholder="Category"> --}}
+                        <button class="site-btn">Recherche</button>
                     </form>
                 </div>
             </div>
@@ -78,95 +81,66 @@
 <section class="course-section spad">
     <div class="container">
         <div class="section-title mb-0">
-            <h2>Featured Courses</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+            <h2>Mes Classes par Matière</h2>
+            <p>Découvrez les différentes classes dans lesquelles j'interviens pour chaque matière que j'enseigne.</p>
         </div>
     </div>
     <div class="course-warp">
         <ul class="course-filter controls">
             <li class="control active" data-filter="all">Toutes les matières</li>
-            <li class="control" data-filter=".finance">matière 1</li>
-            <li class="control" data-filter=".design">matière</li>
-            <li class="control" data-filter=".web">matière</li>
-            <li class="control" data-filter=".photo">matière</li>
+            @if(auth()->user()->subjects && auth()->user()->subjects->count() > 0)
+                @foreach(auth()->user()->subjects->unique('id') as $subject)
+                    <li class="control" data-filter=".subject-{{ $subject->id }}">{{ $subject->name }}</li>
+                @endforeach
+            @endif
         </ul>
         <div class="row course-items-area">
-            <!-- course -->
-            <div class="mix col-lg-3 col-md-4 col-sm-6 finance">
-                <div class="course-item">
-                    <div class="course-thumb set-bg" data-setbg="/plateforme/img/courses/1.jpg">
-                        <div class="price">Price: $15</div>
-                    </div>
-                    <div class="course-info">
-                        <div class="course-text">
-                            <h5>Art & Crafts</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur</p>
-                            <div class="students">120 Students</div>
-                        </div>
-                        <div class="course-author">
-                            <div class="ca-pic set-bg" data-setbg="/plateforme/img/authors/1.jpg"></div>
-                            <p>William Parker, <span>Developer</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- course -->
-            <div class="mix col-lg-3 col-md-4 col-sm-6 design">
-                <div class="course-item">
-                    <div class="course-thumb set-bg" data-setbg="/plateforme/img/courses/2.jpg">
-                        <div class="price">Price: $15</div>
-                    </div>
-                    <div class="course-info">
-                        <div class="course-text">
-                            <h5>IT Development</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur</p>
-                            <div class="students">120 Students</div>
-                        </div>
-                        <div class="course-author">
-                            <div class="ca-pic set-bg" data-setbg="/plateforme/img/authors/2.jpg"></div>
-                            <p>William Parker, <span>Developer</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- course -->
-            <div class="mix col-lg-3 col-md-4 col-sm-6 web">
-                <div class="course-item">
-                    <div class="course-thumb set-bg" data-setbg="/plateforme/img/courses/3.jpg">
-                        <div class="price">Price: $15</div>
-                    </div>
-                    <div class="course-info">
-                        <div class="course-text">
-                            <h5>Graphic Design</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur</p>
-                            <div class="students">120 Students</div>
-                        </div>
-                        <div class="course-author">
-                            <div class="ca-pic set-bg" data-setbg="/plateforme/img/authors/3.jpg"></div>
-                            <p>William Parker, <span>Developer</span></p>
-                        </div>
+            @if(auth()->user()->subjects && auth()->user()->subjects->count() > 0)
+                @foreach(auth()->user()->subjects->unique('id') as $subject)
+                    @php
+                        // Récupérer les classes pour cette matière spécifique
+                        $classesForSubject = auth()->user()->schoolClasses()
+                            ->wherePivot('subject_id', $subject->id)
+                            ->get();
+                    @endphp
+                    @if($classesForSubject->count() > 0)
+                        @foreach($classesForSubject as $class)
+                            <div class="mix col-lg-3 col-md-4 col-sm-6 subject-{{ $subject->id }}">
+                                <div class="course-item">
+                                    <div class="course-thumb" style="background-color: #f8f9fa; display: flex; align-items: center; justify-content: center; height: 200px;">
+                                        <i class="fa fa-graduation-cap" style="font-size: 48px; color: #007bff;"></i>
+                                    </div>
+                                    <div class="course-info">
+                                        <div class="course-text">
+                                            <h5>{{ $class->name }}</h5>
+                                            <p>{{ $class->description ?? 'Classe où j\'enseigne ' . $subject->name }}</p>
+                                            <div class="students">
+                                                @php
+                                                    $studentCount = $class->students ? $class->students->count() : 0;
+                                                @endphp
+                                                {{ $studentCount }} {{ $studentCount > 1 ? 'Élèves' : 'Élève' }}
+                                            </div>
+                                        </div>
+                                        <div class="course-author">
+                                            <div class="ca-pic" style="width: 40px; height: 40px; border-radius: 50%; background-color: #007bff; display: flex; align-items: center; justify-content: center;">
+                                                <i class="fa fa-book" style="color: white; font-size: 16px;"></i>
+                                            </div>
+                                            <p>{{ $subject->name }}, <span>Matière</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                @endforeach
+            @else
+                <div class="col-12">
+                    <div class="text-center">
+                        <h4>Aucune classe assignée</h4>
+                        <p>Contactez l'administration pour l'assignation de classes.</p>
                     </div>
                 </div>
-            </div>
-            <!-- course -->
-            <div class="mix col-lg-3 col-md-4 col-sm-6 photo">
-                <div class="course-item">
-                    <div class="course-thumb set-bg" data-setbg="/plateforme/img/courses/4.jpg">
-                        <div class="price">Price: $15</div>
-                    </div>
-                    <div class="course-info">
-                        <div class="course-text">
-                            <h5>IT Development</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur</p>
-                            <div class="students">120 Students</div>
-                        </div>
-                        <div class="course-author">
-                            <div class="ca-pic set-bg" data-setbg="/plateforme/img/authors/4.jpg"></div>
-                            <p>William Parker, <span>Developer</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endif
         </div>
     </div>
 </section>
@@ -181,17 +155,18 @@
             <div class="col-lg-6">
                 <div class="signup-warp">
                     <div class="section-title text-white text-left">
-                        <h2>Sign up to became a teacher</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+                        <h2>Signalement à l'administration</h2>
+                        <p>Utilisez ce formulaire pour soumettre vos doléances, suggestions ou signaler un problème concernant vos soucis sur la platforme.</p>
                     </div>
-                    <!-- signup form -->
+                    <!-- formulaire de signalement -->
                     <form class="signup-form">
-                        <input type="text" placeholder="Your Name">
-                        <input type="text" placeholder="Your E-mail">
-                        <input type="text" placeholder="Your Phone">
-                        <label for="v-upload" class="file-up-btn">Upload Course</label>
+                        <input type="text" placeholder="Votre nom">
+                        <input type="text" placeholder="Votre email académique">
+                        <input type="text" placeholder="Votre téléphone">
+                        <textarea placeholder="Décrivez votre demande..."></textarea>
+                        <label for="v-upload" class="file-up-btn">Joindre un document</label>
                         <input type="file" id="v-upload">
-                        <button class="site-btn">Search Couse</button>
+                        <button class="site-btn">Envoyer le signalement</button>
                     </form>
                 </div>
             </div>
