@@ -18,12 +18,22 @@
 	<link rel="stylesheet" href="/plateforme/css/owl.carousel.css"/>
 	<link rel="stylesheet" href="/plateforme/css/style.css"/>
 
+    <style>
+        .course-item-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
+}
 
-	<!--[if lt IE 9]>
-	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
+.course-item-link:hover {
+    transform: translateY(-5px);
+}
 
+.course-item-link:hover .course-item {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+    </style>
 </head>
 <body>
 	<!-- Page Preloder -->
@@ -40,24 +50,7 @@
 	@include('frontend.components.hero')
 	<!-- Hero section end -->
 
-
 	@yield('content')
-
-
-	<!-- banner section -->
-	{{-- <section class="banner-section spad">
-		<div class="container">
-			<div class="section-title mb-0 pb-2">
-				<h2>Join Our Community Now!</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
-			</div>
-			<div class="text-center pt-5">
-				<a href="#" class="site-btn">Register Now</a>
-			</div>
-		</div>
-	</section> --}}
-	<!-- banner section end -->
-
 
 	<!-- footer section -->
 	@include('frontend.components.footer')

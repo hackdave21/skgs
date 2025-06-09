@@ -13,6 +13,7 @@ use App\Http\Controllers\PlateformControllers\TeacherAuthController;
 use App\Http\Controllers\PlateformControllers\NoteController;
 use App\Http\Controllers\PlateformControllers\BulletinController;
 use App\Http\Controllers\PlateformControllers\IndexController as PlateformControllersIndexController;
+use App\Http\Controllers\TeacherSiteController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -116,6 +117,11 @@ Route::prefix('notes')->group(function () {
     Route::put('/{SchoolClassId}/{subjectId}/{studentId}', [NoteController::class, 'update'])->name('notes.update');
 });
 
+// Pour les enseignants
+Route::middleware(['auth'])->group(function () {
+    Route::get('/teacher/class/{class}/subject/{subject}/students', [TeacherSiteController::class, 'classStudents'])
+         ->name('teacher.class.students');
+});
 // // Routes pour la gestion des bulletins
 // Route::prefix('bulletins')->group(function () {
 //     Route::get('/{SchoolClassId}', [BulletinController::class, 'index'])->name('bulletins.index');
