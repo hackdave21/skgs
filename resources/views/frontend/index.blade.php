@@ -84,11 +84,11 @@
     </div>
     <div class="course-warp">
         <ul class="course-filter controls">
-            <li class="control active" data-filter="all">All</li>
-            <li class="control" data-filter=".finance">Finance</li>
-            <li class="control" data-filter=".design">Design</li>
-            <li class="control" data-filter=".web">Web Development</li>
-            <li class="control" data-filter=".photo">Photography</li>
+            <li class="control active" data-filter="all">Toutes les matières</li>
+            <li class="control" data-filter=".finance">matière 1</li>
+            <li class="control" data-filter=".design">matière</li>
+            <li class="control" data-filter=".web">matière</li>
+            <li class="control" data-filter=".photo">matière</li>
         </ul>
         <div class="row course-items-area">
             <!-- course -->
