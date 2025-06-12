@@ -37,6 +37,18 @@
                                    value="{{ old('name', $subject->name) }}" required>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="coefficient" class="form-label">Coefficient <span style="color: red;">*</span></label>
+                            <select class="form-control" id="coefficient" name="coefficient" required>
+                                <option value="">Sélectionnez un coefficient</option>
+                                @for($i = 1; $i <= 10; $i++)
+                                    <option value="{{ $i }}" {{ old('coefficient', $subject->coefficient) == $i ? 'selected' : '' }}>
+                                        {{ $i }}
+                                    </option>
+                                @endfor
+                            </select>
+                        </div>
+
                         <button type="submit" class="btn btn-success">Mettre à jour la matière</button>
                     </form>
                 </div>

@@ -6,15 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
-    protected $fillable = ['name'];
+   protected $fillable = ['name', 'coefficient'];
+
+    protected $casts = [
+        'coefficient' => 'integer',
+    ];
 
     public function users()
-{
-    return $this->belongsToMany(User::class, 'subject_teacher')
-                ->using(SubjectTeacher::class)
-                ->withPivot('school_classe_id')
-                ->withTimestamps();
-}
+    {
+        return $this->belongsToMany(User::class, 'subject_teacher')
+                    ->using(SubjectTeacher::class)
+                    ->withPivot('school_classe_id')
+                    ->withTimestamps();
+    }
 
     public function grades()
     {

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SchoolClasse extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'serie'];
 
     public function students()
     {
@@ -24,4 +24,10 @@ class SchoolClasse extends Model
 {
     return $this->hasMany(Subject::class, 'school_class_id');
 }
+
+// Méthode pour obtenir le nom complet avec série
+    public function getFullNameAttribute()
+    {
+        return $this->serie ? $this->name . ' - ' . $this->serie : $this->name;
+    }
 }

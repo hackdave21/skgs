@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'phone_number' => '90909090',
             'sex' => 'masculin',
             'diplome' => 'licence',
-            'email' => 'admin@gmail.com',
+            'email' => 'admin00@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456789'),
             'subject_id' => 1,

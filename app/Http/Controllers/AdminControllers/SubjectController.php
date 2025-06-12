@@ -23,9 +23,10 @@ class SubjectController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:subjects',
+            'coefficient' => 'required|integer|min:1|max:20',
         ]);
 
-        Subject::create($request->only('name'));
+        Subject::create($request->only('name', 'coefficient'));
 
         return redirect()->route('admin.subjects.index')->with('success', 'La matière a été ajoutée avec succès');
     }
@@ -40,12 +41,13 @@ class SubjectController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:subjects,name,' . $id,
+            'coefficient' => 'required|integer|min:1|max:20',
         ]);
 
         $subject = Subject::findOrFail($id);
-        $subject->update($request->only('name'));
+        $subject->update($request->only('name', 'coefficient'));
 
-        return redirect()->route('admin.subjects.index')->with('success', 'La matière a été mis a jour avec succès');
+        return redirect()->route('admin.subjects.index')->with('success', 'La matière a été mise à jour avec succès');
     }
 
     public function delete($id)
