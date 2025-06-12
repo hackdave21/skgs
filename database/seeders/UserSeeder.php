@@ -11,22 +11,26 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-     /**
+    /**
      * Run the database seeds.
      */
     public function run(): void
     {
+        // Récupérer le premier sujet et la première classe créés par les autres seeders
+        $firstSubject = Subject::first();
+        $firstClass = SchoolClasse::first();
+
         $admin = User::create([
             'first_name' => 'John',
             'last_name' => 'DOE',
             'phone_number' => '90909090',
             'sex' => 'masculin',
             'diplome' => 'licence',
-            'email' => 'admin00@gmail.com',
+            'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456789'),
-            'subject_id' => 1,
-            'school_classe_id' => 1,
+            'subject_id' => $firstSubject->id,
+            'school_classe_id' => $firstClass->id,
         ]);
 
         // Récupérer toutes les matières et toutes les classes
