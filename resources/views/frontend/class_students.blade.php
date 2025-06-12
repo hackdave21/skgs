@@ -26,8 +26,11 @@
                                 <th>Nom</th>
                                 <th>Prénom</th>
                                 <th>Matricule</th>
-                                <th>Notes</th>
-
+                                <th>Note 1</th>
+                                <th>Note 2</th>
+                                <th>Devoir</th>
+                                <th>Compos</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,9 +40,24 @@
                                 <td>{{ $student->last_name }}</td>
                                 <td>{{ $student->first_name }}</td>
                                 <td>{{ $student->matricule_number }}</td>
-
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-outline-info">Voir</a>
+                                   note1
+                                </td>
+                                <td>
+                                   note2
+                                </td>
+                                <td>
+                                   Devoir
+                                </td>
+                                <td>
+                                   Composition
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-info"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#gradesModal{{ $student->id }}">
+                                        Voir/Modifier
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
@@ -56,4 +74,106 @@
 
     </div>
 </section>
+
+<!-- Modals pour chaque étudiant -->
+@foreach($students as $student)
+<div class="modal fade" id="gradesModal{{ $student->id }}" tabindex="-1" aria-labelledby="gradesModalLabel{{ $student->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gradesModalLabel{{ $student->id }}">
+                    Notes de {{ $student->first_name }} {{ $student->last_name }} - {{ $subject->name }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @php
+                    $studentGrades = $student->grades->where('subject_id', $subject->id)->where('school_classe_id', $class->id);
+                @endphp
+
+                <!-- Affichage des notes existantes -->
+                <div class="mb-4">
+                    <h6>Notes existantes :</h6>
+                    @if($studentGrades->count() > 0)
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Note</th>
+                                        <th>Date</th>
+                                        <th>Professeur</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($studentGrades as $grade)
+                                    <tr>
+                                        <td><span class="badge bg-primary">{{ $grade->note }}/20</span></td>
+                                        <td>{{ $grade->created_at->format('d/m/Y') }}</td>
+                                        <td>{{ $grade->user->name ?? 'N/A' }}</td>
+                                        <td>
+                                            <form method="POST" action="{{ route('teacher.grade.delete', $grade->id) }}"
+                                                  style="display: inline;"
+                                                  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette note ?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="alert alert-info">
+                            <strong>Moyenne :</strong> {{ round($studentGrades->avg('note'), 2) }}/20
+                        </div>
+                    @else
+                        <div class="alert alert-warning">
+                            Aucune note enregistrée pour cet élève dans cette matière.
+                        </div>
+                    @endif
+                </div>
+
+                <!-- Formulaire d'ajout de note -->
+                <div class="border-top pt-3">
+                    <h6>Ajouter une nouvelle note :</h6>
+                    <form method="POST" action="{{ route('teacher.grade.store') }}">
+                        @csrf
+                        <input type="hidden" name="student_id" value="{{ $student->id }}">
+                        <input type="hidden" name="subject_id" value="{{ $subject->id }}">
+                        <input type="hidden" name="school_classe_id" value="{{ $class->id }}">
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="note{{ $student->id }}" class="form-label">Note (sur 20) :</label>
+                                    <input type="number"
+                                           class="form-control"
+                                           id="note{{ $student->id }}"
+                                           name="note"
+                                           min="0"
+                                           max="20"
+                                           step="0.5"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fa fa-plus"></i> Ajouter
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection

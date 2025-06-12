@@ -26,12 +26,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-        // Routes pour les rapports
-        // Route::prefix('reports')->group(function () {
-        //     Route::get('/generate/{classId}', [ReportController::class, 'generate'])->name('admin.reports.generate');
-        //     Route::get('/download/{classId}', [ReportController::class, 'download'])->name('admin.reports.download');
-        // });
     });
 });
 
@@ -121,10 +115,10 @@ Route::prefix('notes')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/teacher/class/{class}/subject/{subject}/students', [TeacherSiteController::class, 'classStudents'])
          ->name('teacher.class.students');
+
+    Route::post('/teacher/grade/store', [TeacherSiteController::class, 'storeGrade'])
+         ->name('teacher.grade.store');
+
+    Route::delete('/teacher/grade/{grade}', [TeacherSiteController::class, 'deleteGrade'])
+         ->name('teacher.grade.delete');
 });
-// // Routes pour la gestion des bulletins
-// Route::prefix('bulletins')->group(function () {
-//     Route::get('/{SchoolClassId}', [BulletinController::class, 'index'])->name('bulletins.index');
-//     Route::get('/{studentId}', [BulletinController::class, 'show'])->name('bulletins.show');
-//     Route::get('/{studentId}/generate', [BulletinController::class, 'generateReport'])->name('bulletins.generate');
-// });

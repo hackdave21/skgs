@@ -46,28 +46,25 @@
 				<div class="owl-carousel login-slide owl-theme">
 					<div class="welcome-login">
 						<div class="login-banner">
-							<img src="{{ asset('platform/assets/img/tea.png') }}" class="img-fluid" alt="Logo">
+							<img src="{{ asset('platform/assets/img/bleu.png') }}" class="img-fluid" alt="Logo">
 						</div>
 						<div class="mentor-course text-center">
-							<h2>SKGS</h2>
 							<p>Une solution pour numériser la génération des bulletins scolaires</p>
 						</div>
 					</div>
 					<div class="welcome-login">
 						<div class="login-banner">
-							<img src="{{ asset('platform/assets/img/tea.png') }}" class="img-fluid" alt="Logo">
+							<img src="{{ asset('platform/assets/img/bleu.png') }}" class="img-fluid" alt="Logo">
 						</div>
 						<div class="mentor-course text-center">
-							<h2>SKGS</h2>
 							<p>Travaillez aisément</p>
 						</div>
 					</div>
 					<div class="welcome-login">
 						<div class="login-banner">
-							<img src="{{ asset('platform/assets/img/tea.png') }}" class="img-fluid" alt="Logo">
+							<img src="{{ asset('platform/assets/img/bleu.png') }}" class="img-fluid" alt="Logo">
 						</div>
 						<div class="mentor-course text-center">
-                            <h2>SKGS</h2>
 							<p>Gestion des notes</p>
 						</div>
 					</div>
@@ -81,9 +78,6 @@
 				<div class="login-wrapper">
 					<div class="loginbox">
 						<div class="w-100">
-							<div class="img-logo">
-								<img src="{{ asset('platform/assets/img/SKGS.png') }}" class="img-fluid" alt="Logo">
-							</div>
 							<h1>Bienvenue sur SKGS entrez vos identifiants pour vous connecter</h1>
 							<form action="{{ route('teacher.login.submit') }}" method="POST">
                                 @csrf
