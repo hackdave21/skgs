@@ -30,27 +30,62 @@
                                 <th>Note 2</th>
                                 <th>Devoir</th>
                                 <th>Compos</th>
+                                <th>Moyenne</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($students as $student)
+                            @php
+                                $studentGrade = $student->grades->where('subject_id', $subject->id)->where('school_classe_id', $class->id)->first();
+                            @endphp
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $student->last_name }}</td>
                                 <td>{{ $student->first_name }}</td>
                                 <td>{{ $student->matricule_number }}</td>
                                 <td>
-                                   note1
+                                    @if($studentGrade && $studentGrade->note1)
+                                        <span class="badge bg-info">{{ $studentGrade->note1 }}/20</span>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
                                 </td>
                                 <td>
-                                   note2
+                                    @if($studentGrade && $studentGrade->note2)
+                                        <span class="badge bg-info">{{ $studentGrade->note2 }}/20</span>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
                                 </td>
                                 <td>
-                                   Devoir
+                                    @if($studentGrade && $studentGrade->devoir)
+                                        <span class="badge bg-warning">{{ $studentGrade->devoir }}/20</span>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
                                 </td>
                                 <td>
-                                   Composition
+                                    @if($studentGrade && $studentGrade->compos)
+                                        <span class="badge bg-success">{{ $studentGrade->compos }}/20</span>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($studentGrade)
+                                        @php
+                                            $notes = collect([$studentGrade->note1, $studentGrade->note2, $studentGrade->devoir, $studentGrade->compos])->filter();
+                                            $moyenne = $notes->count() > 0 ? round($notes->avg(), 2) : null;
+                                        @endphp
+                                        @if($moyenne)
+                                            <span class="badge bg-primary">{{ $moyenne }}/20</span>
+                                        @else
+                                            <span class="text-muted">-</span>
+                                        @endif
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <button class="btn btn-sm btn-outline-info"
@@ -71,12 +106,14 @@
                 @endif
             </div>
         </div>
-
     </div>
 </section>
 
 <!-- Modals pour chaque étudiant -->
 @foreach($students as $student)
+@php
+    $studentGrade = $student->grades->where('subject_id', $subject->id)->where('school_classe_id', $class->id)->first();
+@endphp
 <div class="modal fade" id="gradesModal{{ $student->id }}" tabindex="-1" aria-labelledby="gradesModalLabel{{ $student->id }}" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -87,86 +124,185 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                @php
-                    $studentGrades = $student->grades->where('subject_id', $subject->id)->where('school_classe_id', $class->id);
-                @endphp
-
-                <!-- Affichage des notes existantes -->
+                <!-- Affichage et modification des notes -->
                 <div class="mb-4">
-                    <h6>Notes existantes :</h6>
-                    @if($studentGrades->count() > 0)
-                        <div class="table-responsive">
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>Note</th>
-                                        <th>Date</th>
-                                        <th>Professeur</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($studentGrades as $grade)
-                                    <tr>
-                                        <td><span class="badge bg-primary">{{ $grade->note }}/20</span></td>
-                                        <td>{{ $grade->created_at->format('d/m/Y') }}</td>
-                                        <td>{{ $grade->user->name ?? 'N/A' }}</td>
-                                        <td>
-                                            <form method="POST" action="{{ route('teacher.grade.delete', $grade->id) }}"
-                                                  style="display: inline;"
-                                                  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette note ?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                    <h6>Gestion des notes :</h6>
+
+                    @if($studentGrade)
+                        <!-- Formulaire de modification des notes existantes -->
+                        <div class="row">
+                            <!-- Note 1 -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Note 1 (sur 20) :</label>
+                                <div class="input-group">
+                                    <form method="POST" action="{{ route('teacher.grade.update', $studentGrade->id) }}" class="d-flex w-100">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="note_type" value="note1">
+                                        <input type="number" class="form-control" name="note_value"
+                                               value="{{ $studentGrade->note1 }}" min="0" max="20" step="0.25">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                                            <i class="fa fa-save"></i>
+                                        </button>
+                                        @if($studentGrade->note1)
+                                        <form method="POST" action="{{ route('teacher.grade.delete-specific', $studentGrade->id) }}" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="note_type" value="note1">
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        @endif
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Note 2 -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Note 2 (sur 20) :</label>
+                                <div class="input-group">
+                                    <form method="POST" action="{{ route('teacher.grade.update', $studentGrade->id) }}" class="d-flex w-100">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="note_type" value="note2">
+                                        <input type="number" class="form-control" name="note_value"
+                                               value="{{ $studentGrade->note2 }}" min="0" max="20" step="0.25">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                                            <i class="fa fa-save"></i>
+                                        </button>
+                                        @if($studentGrade->note2)
+                                        <form method="POST" action="{{ route('teacher.grade.delete-specific', $studentGrade->id) }}" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="note_type" value="note2">
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        @endif
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Devoir -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Devoir (sur 20) :</label>
+                                <div class="input-group">
+                                    <form method="POST" action="{{ route('teacher.grade.update', $studentGrade->id) }}" class="d-flex w-100">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="note_type" value="devoir">
+                                        <input type="number" class="form-control" name="note_value"
+                                               value="{{ $studentGrade->devoir }}" min="0" max="20" step="0.25">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                                            <i class="fa fa-save"></i>
+                                        </button>
+                                        @if($studentGrade->devoir)
+                                        <form method="POST" action="{{ route('teacher.grade.delete-specific', $studentGrade->id) }}" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="note_type" value="devoir">
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        @endif
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Composition -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Composition (sur 20) :</label>
+                                <div class="input-group">
+                                    <form method="POST" action="{{ route('teacher.grade.update', $studentGrade->id) }}" class="d-flex w-100">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="note_type" value="compos">
+                                        <input type="number" class="form-control" name="note_value"
+                                               value="{{ $studentGrade->compos }}" min="0" max="20" step="0.25">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                                            <i class="fa fa-save"></i>
+                                        </button>
+                                        @if($studentGrade->compos)
+                                        <form method="POST" action="{{ route('teacher.grade.delete-specific', $studentGrade->id) }}" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="note_type" value="compos">
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        @endif
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div class="alert alert-info">
-                            <strong>Moyenne :</strong> {{ round($studentGrades->avg('note'), 2) }}/20
+
+                        <!-- Affichage de la moyenne -->
+                        @php
+                            $notes = collect([$studentGrade->note1, $studentGrade->note2, $studentGrade->devoir, $studentGrade->compos])->filter();
+                            $moyenne = $notes->count() > 0 ? round($notes->avg(), 2) : null;
+                        @endphp
+                        @if($moyenne)
+                            <div class="alert alert-info">
+                                <strong>Moyenne actuelle :</strong> {{ $moyenne }}/20
+                            </div>
+                        @endif
+
+                        <!-- Bouton pour supprimer toutes les notes -->
+                        <div class="mt-3">
+                            <form method="POST" action="{{ route('teacher.grade.delete', $studentGrade->id) }}"
+                                  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer toutes les notes de cet élève ?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger">
+                                    <i class="fa fa-trash"></i> Supprimer toutes les notes
+                                </button>
+                            </form>
                         </div>
                     @else
+                        <!-- Formulaire pour ajouter la première note -->
                         <div class="alert alert-warning">
                             Aucune note enregistrée pour cet élève dans cette matière.
                         </div>
-                    @endif
-                </div>
 
-                <!-- Formulaire d'ajout de note -->
-                <div class="border-top pt-3">
-                    <h6>Ajouter une nouvelle note :</h6>
-                    <form method="POST" action="{{ route('teacher.grade.store') }}">
-                        @csrf
-                        <input type="hidden" name="student_id" value="{{ $student->id }}">
-                        <input type="hidden" name="subject_id" value="{{ $subject->id }}">
-                        <input type="hidden" name="school_classe_id" value="{{ $class->id }}">
+                        <div class="border-top pt-3">
+                            <h6>Ajouter une première note :</h6>
+                            <form method="POST" action="{{ route('teacher.grade.store') }}">
+                                @csrf
+                                <input type="hidden" name="student_id" value="{{ $student->id }}">
+                                <input type="hidden" name="subject_id" value="{{ $subject->id }}">
+                                <input type="hidden" name="school_classe_id" value="{{ $class->id }}">
 
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="note{{ $student->id }}" class="form-label">Note (sur 20) :</label>
-                                    <input type="number"
-                                           class="form-control"
-                                           id="note{{ $student->id }}"
-                                           name="note"
-                                           min="0"
-                                           max="20"
-                                           step="0.5"
-                                           required>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Type de note :</label>
+                                            <select name="note_type" class="form-control" required>
+                                                <option value="">Sélectionner...</option>
+                                                <option value="note1">Note 1</option>
+                                                <option value="note2">Note 2</option>
+                                                <option value="devoir">Devoir</option>
+                                                <option value="compos">Composition</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Note (sur 20) :</label>
+                                            <input type="number" class="form-control" name="note_value"
+                                                   min="0" max="20" step="0.25" required>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4 d-flex align-items-end">
-                                <button type="submit" class="btn btn-primary w-100">
-                                    <i class="fa fa-plus"></i> Ajouter
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-plus"></i> Ajouter la note
                                 </button>
-                            </div>
+                            </form>
                         </div>
-                    </form>
+                    @endif
                 </div>
             </div>
             <div class="modal-footer">

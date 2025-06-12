@@ -5,7 +5,7 @@
                  <div class="widget-item">
                      <div class="site-logo">
                     <img src="/plateforme/img/bleu.png" alt="">
-                </div>
+                     </div>
                 </div>
                 <div class="widget-item">
                     <h4>Coordonnées</h4>

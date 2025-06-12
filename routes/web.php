@@ -102,23 +102,21 @@ Route::prefix('teacher')->group(function () {
         });
     });
 
-
-// Routes pour la gestion des notes
-Route::prefix('notes')->group(function () {
-    Route::get('/{SchoolClassId}/{subjectId}', [NoteController::class, 'showForm'])->name('notes.form');
-    Route::post('/store', [NoteController::class, 'store'])->name('notes.store');
-    Route::get('/{SchoolClassId}/{subjectId}/{studentId}/edit', [NoteController::class, 'edit'])->name('notes.edit');
-    Route::put('/{SchoolClassId}/{subjectId}/{studentId}', [NoteController::class, 'update'])->name('notes.update');
-});
-
 // Pour les enseignants
 Route::middleware(['auth'])->group(function () {
     Route::get('/teacher/class/{class}/subject/{subject}/students', [TeacherSiteController::class, 'classStudents'])
          ->name('teacher.class.students');
 
+    // Routes pour la gestion des notes
     Route::post('/teacher/grade/store', [TeacherSiteController::class, 'storeGrade'])
          ->name('teacher.grade.store');
 
+    Route::put('/teacher/grade/{grade}', [TeacherSiteController::class, 'updateGrade'])
+         ->name('teacher.grade.update');
+
     Route::delete('/teacher/grade/{grade}', [TeacherSiteController::class, 'deleteGrade'])
          ->name('teacher.grade.delete');
+
+    Route::delete('/teacher/grade/{grade}/specific', [TeacherSiteController::class, 'deleteSpecificGrade'])
+         ->name('teacher.grade.delete-specific');
 });
