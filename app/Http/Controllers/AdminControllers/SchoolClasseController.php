@@ -22,10 +22,10 @@ class SchoolClasseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:school_classes',
+            'name' => 'required|string|max:255',
         ]);
 
-        SchoolClasse::create($request->only('name'));
+        SchoolClasse::create($request->only(['name']));
 
         return redirect()->route('admin.school_classes.index')->with('success', 'Classe ajoutée avec succès');
     }
@@ -43,14 +43,14 @@ class SchoolClasseController extends Controller
         ]);
 
         $school_classe = SchoolClasse::findOrFail($id);
-        $school_classe->update($request->only('name'));
+        $school_classe->update($request->only(['name']));
 
-        return redirect()->route('admin.school_classes.index')->with('success', 'Classe mis à jour avec Succès');
+        return redirect()->route('admin.school_classes.index')->with('success', 'Classe mise à jour avec succès');
     }
 
     public function destroy($id)
     {
         SchoolClasse::findOrFail($id)->delete();
-        return redirect()->route('admin.school_classes.index')->with('success', 'Classe supprimée avec Succès');
+        return redirect()->route('admin.school_classes.index')->with('success', 'Classe supprimée avec succès');
     }
 }

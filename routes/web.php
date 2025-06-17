@@ -10,10 +10,7 @@ use App\Http\Controllers\AdminControllers\StudentController;
 use App\Http\Controllers\AdminControllers\SubjectController;
 use App\Http\Controllers\AdminControllers\TeacherController;
 use App\Http\Controllers\PlateformControllers\TeacherAuthController;
-use App\Http\Controllers\PlateformControllers\NoteController;
-use App\Http\Controllers\PlateformControllers\BulletinController;
 use App\Http\Controllers\PlateformControllers\IndexController as PlateformControllersIndexController;
-use App\Http\Controllers\SerieController;
 use App\Http\Controllers\TeacherSiteController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -68,18 +65,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-// Routes pour la gestion des séries
-Route::prefix('admin')->name('admin.')->group(function () {
-
-    Route::prefix('series')->name('series.')->group(function () {
-        Route::get('/', [SerieController::class, 'index'])->name('index');
-        Route::get('/create', [SerieController::class, 'create'])->name('create');
-        Route::post('/store', [SerieController::class, 'store'])->name('store');
-        Route::get('/edit/{id}', [SerieController::class, 'edit'])->name('edit');
-        Route::put('/update/{id}', [SerieController::class, 'update'])->name('update');
-        Route::delete('/delete/{id}', [SerieController::class, 'destroy'])->name('delete');
-    });
-});
 
 // Routes pour la gestion des eleves
 Route::prefix('admin')->name('admin.')->group(function () {

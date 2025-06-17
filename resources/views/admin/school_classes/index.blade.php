@@ -23,7 +23,7 @@
                         </div>
                     @endif
 
-                      <!-- Bouton pour ajouter un nouvel élève -->
+                      <!-- Bouton pour ajouter une nouvelle classe -->
                       <a href="{{ route('admin.school_classes.create') }}" class="btn btn-primary mb-3">Ajouter une nouvelle classe</a>
 
                     <table class="table table-bordered">
@@ -40,7 +40,7 @@
                                     <td>{{ $class->id }}</td>
                                     <td>{{ $class->name }}</td>
                                     <td>
-                                        <a href="{{ route('admin.school_classes.edit', $class->id) }}" class="btn btn-warning btn-sm">Modifier</a>
+                                        <a href="{{ route('admin.school_classes.edit', $class->id) }}" class="btn btn-warning btn-sm"><i class="mdi mdi-pencil"></i></a>
                                         <form action="{{ route('admin.school_classes.delete', $class->id) }}" method="POST" style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')

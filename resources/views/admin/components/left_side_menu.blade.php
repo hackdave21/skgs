@@ -39,20 +39,6 @@
                     </a>
                 </li>
 
-                  <!-- Series -->
-                  <li>
-                    <a href="#sidebarMatière" data-bs-toggle="collapse">
-                      <i class="mdi mdi-pencil"></i>
-                        <span>Series</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarMatière">
-                        <ul class="nav-second-level">
-                            <li><a href="{{route('admin.series.create')}}">Ajouter une serie</a></li>
-                            <li><a href="{{route('admin.series.index')}}">Voir tout</a></li>
-                        </ul>
-                    </div>
-                </li>
                 <!-- Classes -->
                 <li>
                     <a href="#sidebarClasses" data-bs-toggle="collapse">
