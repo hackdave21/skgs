@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Admin panel login page." name="description" />
     <meta content="Author" name="author" />
-    <link rel="shortcut icon" href="{{ asset('template/ubold/assets/images/SKGS.png') }}">
+    <link rel="shortcut icon" href="{{ asset('template/ubold/assets/images/bleu.png') }}">
     <link href="{{ asset('template/ubold/layouts/assets/css/config/purple/app.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('template/ubold/layouts/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMg0lZSYLqTw/ey4HsBR5hfBc5p6bBhF23HOZf4" crossorigin="anonymous">
@@ -124,7 +124,7 @@
                 <div class="col-md-12">
                     <script>
                         document.write(new Date().getFullYear())
-                    </script> &copy; SKGS powered by <a href="https://kofcorporation.com/">flutter_dave</a>
+                    </script> &copy; SKGS powered by <a href="https://portfolio-lidaouwe-alawi.netlify.app/">THS</a>
                 </div>
             </div>
         </div>

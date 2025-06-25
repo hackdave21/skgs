@@ -4,7 +4,7 @@
             <div class="col-md-6">
                 <script>
                     document.write(new Date().getFullYear())
-                </script> &copy; SKGS powered by <a href="">flutter_dave</a>
+                </script> &copy; SKGS powered by <a href="https://portfolio-lidaouwe-alawi.netlify.app/">THS</a>
             </div>
 
         </div>

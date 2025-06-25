@@ -68,10 +68,10 @@
         <div class="logo-box" style="display: flex; align-items: center;">
             <a href="index.html" class="logo logo-light text-center">
                 <span class="logo-sm">
-                    <img src={{ asset('template/ubold/assets/images/SKGS.png') }} alt="SKGS" height="80">
+                    <img src={{ asset('template/ubold/assets/images/skgslogo.png') }} alt="SKGS" height="57px" width="180px">
                 </span>
                 <span class="logo-lg">
-                    <img src={{ asset('template/ubold/assets/images/SKGS.png') }} alt="SKGS" height="80">
+                    <img src={{ asset('template/ubold/assets/images/skgslogo.png') }} alt="SKGS" height="57px" width="180px">
                 </span>
             </a>
         </div>

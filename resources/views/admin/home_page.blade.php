@@ -10,7 +10,7 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('template/ubold/assets/images/SKGS.png') }}">
+    <link rel="shortcut icon" href="{{ asset('template/ubold/assets/images/bleu.png') }}">
     <style>.input-group-text {
         cursor: pointer;
     }</style>

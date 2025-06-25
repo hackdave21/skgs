@@ -11,6 +11,7 @@
 
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('platform/assets/img/SKGS.png') }}">
+     <link rel="shortcut icon" href="{{ asset('template/ubold/assets/images/bleu.png') }}">
 
 	<!-- Theme Settings Js -->
 	<script src="{{ asset('platform/assets/js/theme-script.js') }}" type="54fdcfa88c30ae24cb15d906-text/javascript"></script>
