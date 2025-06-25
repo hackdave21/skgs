@@ -7,8 +7,7 @@
 	<meta name="keywords" content="webuni, education, creative, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Favicon -->
-	<link href="/plateforme/img/favicon.ico" rel="shortcut icon"/>
-
+	 <link rel="shortcut icon" href="{{ asset('template/ubold/assets/images/bleu.png') }}">
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
 
