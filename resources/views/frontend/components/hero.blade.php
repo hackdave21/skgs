@@ -2,7 +2,14 @@
     <div class="container">
        <div class="hero-text text-white">
     <h2>SKGS - Plateforme de Gestion Scolaire</h2>
-    <p>Bienvenue sur votre espace enseignant dédié à la saisie et au suivi des notes.<br>
+    <p>Bienvenue
+        @if(Auth::check())
+            <span style="color: #d82a4e; font-weight: bold;">
+                {{ Auth::user()->sex == 'M' ? 'Monsieur' : 'Madame' }}
+               <span style="color: #d82a4e; font-weight: bold; font-size: 2em;"> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+            </span>
+        @endif
+        sur votre espace enseignant dédié à la saisie et au suivi des notes.<br>
     Enregistrez et gérez facilement les résultats de vos élèves par classe et par matière.</p>
 </div>
         {{-- <div class="row">
