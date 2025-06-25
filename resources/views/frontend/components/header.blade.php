@@ -13,9 +13,9 @@
                 <a href="" class="site-btn header-btn">Connexion</a>
                 <nav class="main-menu">
                     <ul>
-                        <li><a href="index.html">Acceuil</a></li>
+                        <li><a href="{{ route('frontend.index') }}">Acceuil</a></li>
                         <li><a href="#">A propos</a></li>
-                        <li><a href="courses.html">Classes</a></li>
+                        <li><a href="{{ route('all.classes') }}">Classes</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>

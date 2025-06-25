@@ -13,6 +13,7 @@ use App\Http\Controllers\PlateformControllers\TeacherAuthController;
 use App\Http\Controllers\PlateformControllers\IndexController as PlateformControllersIndexController;
 use App\Http\Controllers\TeacherSiteController;
 
+Route::view('/allclasses', 'frontend.allclasses')->name('all.classes');
 Route::prefix('admin')->name('admin.')->group(function () {
 
     // Page de connexion
